@@ -7,7 +7,7 @@ class CharacterListItem extends Component {
     thumbnail = thumbnail.path + '.' + thumbnail.extension;
     return (
       <div className="character-list-item">
-        <li>{name}: {description}</li>
+        <li>{name}</li>
         <img src={thumbnail} className="thumbnail" />
       </div>
     );

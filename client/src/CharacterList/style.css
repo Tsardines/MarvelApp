@@ -1,0 +1,9 @@
+.character-cell-container ul {
+    overflow: auto;
+    height: 100%;
+}
+
+.character-cell-container {
+  height: 80vh;
+}
+

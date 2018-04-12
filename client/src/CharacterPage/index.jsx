@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import CharacterList from "../CharacterList";
 import CharacterDetail from "../CharacterDetail";
-
+import "./style.css";
 
 class CharacterPage extends Component {
   constructor(props) {
@@ -40,7 +40,7 @@ class CharacterPage extends Component {
 
     return (
       <div className="character-page">
-        <h1>CHARACTER PAGE</h1>
+{/*        <h1>CHARACTER PAGE</h1>*/}
         <CharacterList characters={this.state.characters}/>
         <CharacterDetail />
       </div>

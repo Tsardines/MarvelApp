@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CharacterListItem from "../CharacterListItem"
+import "./style.css";
 
 class CharacterList extends Component {
   render() {
@@ -12,8 +13,10 @@ class CharacterList extends Component {
     return (
       <div className="character-list-container">
         <h1>CHARACTER LIST</h1>
-        <div className="character-cell-container">
-          {characterItems}
+        <div  className="character-cell-container">
+          <ul>
+            {characterItems}
+          </ul>
         </div>
       </div>
     );

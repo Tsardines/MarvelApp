@@ -2,16 +2,10 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./style.css";
 
-// home favorites login signup
-
 class Navbar extends Component {
   render() {
     return (
       <ul className="nav">
-
-        <li className="nav-item">
-          <h1 className="site-logo">Marvel App</h1>
-        </li>
 
         <li className="nav-item">
           <Link to="/" className="nav-link">
