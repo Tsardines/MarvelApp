@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+
+
 import Navbar from "./Navbar";
 import Login from "./Login";
 import Register from "./Register";
 import './App.css';
+import FavoriteCharacter from './FavoriteCharacter';
+import MarvelCharacter from './MarvelCharacter';
+import User from './User';
+import MarvelData from './MarvelData';
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -10,6 +16,9 @@ class App extends Component {
 
   render() {
     return (
+
+
+
       <Router>
         <div className="container">
           <Navbar />
@@ -19,6 +28,7 @@ class App extends Component {
 
         </div>
       </Router>
+
     );
   }
 }
