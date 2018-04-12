@@ -24,6 +24,9 @@ class Register extends React.Component {
   handleRegisterSubmit(evt) {
     evt.preventDefault();
     console.log('you clicked button');
+    this.setState({
+      clickedLogin: true
+    })
   };
 
   render() {

@@ -24,6 +24,9 @@ class Login extends React.Component {
   handleLoginSubmit(evt) {
     evt.preventDefault();
     console.log('you clicked button');
+    this.setState({
+      clickedLogin: true
+    })
   };
 
   render() {
