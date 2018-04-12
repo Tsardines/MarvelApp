@@ -12,14 +12,17 @@ const User = require("./Models/User");
 const MarvelCharacter = require("./Models/MarvelCharacter");
 const MarvelData = require("./Models/MarvelData")
 
-//create function to generate time stamp & matching hash
+//need to create function to generate time stamp & matching hash
 
+
+//get all characters from API
 app.get('/api/characters', (req, res) => {
   MarvelData.getReponseAsJSON('http://gateway.marvel.com/v1/public/characters?apikey=c595c1f12b2db2191ce42b2a9360ba56&ts=1523454631254&hash=99a15b4f4557e89e9b94dea04c439bd5').then(characters => {
     res.json(characters)
   })
 });
 
+//get specific character by id from API
 app.get('/api/characters/:id', (req, res) => {
   const id = req.params.id
   MarvelData.getReponseAsJSON(`http://gateway.marvel.com/v1/public/characters/${id}?apikey=c595c1f12b2db2191ce42b2a9360ba56&ts=1523454631254&hash=99a15b4f4557e89e9b94dea04c439bd5`).then(character => {
@@ -49,6 +52,7 @@ app.post('/user', urlencodedParser, (request, response) => {
     })
 });
 
+//add new user and password to DB
 app.post('/signup', urlencodedParser, (request, response) => {
   // get pw entered by user
   const newUsername = request.body.username;
@@ -62,6 +66,15 @@ app.post('/signup', urlencodedParser, (request, response) => {
     )
 });
 
+//gets a specific user's favorite list
+app.get('/favorites/:user_id', urlencodedParser, (request, response) => {
+  const userId = request.params.user_id
+  FavoriteCharacter.findAll(userId).then(
+    response.send('These are all of user 1 favorites')
+  )
+});
+
+//adds a new character to a specific user's favorite list
 app.post('/favorites/:user_id/:character_id', urlencodedParser, (request, response) => {
   const userId = request.params.user_id
   const characterId = request.params.character_id
@@ -72,19 +85,23 @@ app.post('/favorites/:user_id/:character_id', urlencodedParser, (request, respon
   )
 });
 
-app.get('/favorites/:user_id', urlencodedParser, (request, response) => {
-  const userId = request.params.user_id
-  FavoriteCharacter.findAll(userId).then(
-    response.send('These are all of user 1 favorites')
-  )
-});
-
+//deletes a character from a specific user's favorite list
 app.delete('/favorites/:user_id/:character_id', urlencodedParser, (request, response) => {
   const userId = request.params.user_id
   const characterId = request.params.character_id
   FavoriteCharacter.delete(userId, characterId).then(
     response.send('You deleted user 1 favorite item')
   )
+});
+
+//edits a character's note in a specific user's favorite list
+app.put("/favorites/edit/:user_id/:character_id", urlencodedParser, (request, response) => {
+  const editNoteData = request.body.notes
+  const userId = request.params.user_id
+  const characterId = request.params.character_id
+  FavoriteCharacter.edit(editNoteData, userId, characterId).then(
+    response.send('You edited your note')
+  );
 });
 
 app.listen(4567, () => console.log("Marvel server listening on port 4567!"));
