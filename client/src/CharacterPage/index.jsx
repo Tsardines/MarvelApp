@@ -10,7 +10,7 @@ class CharacterPage extends Component {
     this.state = {
       characters: [],
       charactersLoaded: false
-    }
+    };
     this.fetchCharacters = this.fetchCharacters.bind(this);
   }
 
@@ -19,34 +19,31 @@ class CharacterPage extends Component {
   }
 
   fetchCharacters() {
-    fetch("http://gateway.marvel.com/v1/public/characters?apikey=c595c1f12b2db2191ce42b2a9360ba56&ts=1523454631254&hash=99a15b4f4557e89e9b94dea04c439bd5&offset=0&limit=100")
+    fetch("http://localhost:4567/api/characters")
+      // fetch("http://gateway.marvel.com/v1/public/characters?apikey=c595c1f12b2db2191ce42b2a9360ba56&ts=1523454631254&hash=99a15b4f4557e89e9b94dea04c439bd5&offset=0&limit=100")
       .then(response => response.json())
       .then(charactersAsJson => {
         let characters = charactersAsJson.data.results;
         this.setState({
           characters: characters,
           charactersLoaded: true
-        })
-      })
-
+        });
+      });
   }
 
-
   render() {
-
     if (!this.state.charactersLoaded) {
-      return <div>Loading...</div>
+      return <div>Loading...</div>;
     }
 
     return (
       <div className="character-page">
-{/*        <h1>CHARACTER PAGE</h1>*/}
-        <CharacterList characters={this.state.characters}/>
+        {/*        <h1>CHARACTER PAGE</h1>*/}
+        <CharacterList characters={this.state.characters} />
         <CharacterDetail />
       </div>
-    )
+    );
   }
-
 }
 
 export default CharacterPage;
