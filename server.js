@@ -62,4 +62,29 @@ app.post('/signup', urlencodedParser, (request, response) => {
     )
 });
 
+app.post('/favorites/:user_id/:character_id', urlencodedParser, (request, response) => {
+  const userId = request.params.user_id
+  const characterId = request.params.character_id
+  const notes = ''
+  FavoriteCharacter.createFavorite(userId, characterId, notes)
+  .then(
+    response.send('You created a new favorite')
+  )
+});
+
+app.get('/favorites/:user_id', urlencodedParser, (request, response) => {
+  const userId = request.params.user_id
+  FavoriteCharacter.findAll(userId).then(
+    response.send('These are all of user 1 favorites')
+  )
+});
+
+app.delete('/favorites/:user_id/:character_id', urlencodedParser, (request, response) => {
+  const userId = request.params.user_id
+  const characterId = request.params.character_id
+  FavoriteCharacter.delete(userId, characterId).then(
+    response.send('You deleted user 1 favorite item')
+  )
+});
+
 app.listen(4567, () => console.log("Marvel server listening on port 4567!"));
