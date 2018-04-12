@@ -4,10 +4,6 @@ import Navbar from "./Navbar";
 import Login from "./Login";
 import Register from "./Register";
 import "./App.css";
-import FavoriteCharacter from "./FavoriteCharacter";
-import MarvelCharacter from "./MarvelCharacter";
-import User from "./User";
-// import MarvelData from "./Models/MarvelData";
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
