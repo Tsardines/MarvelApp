@@ -3,13 +3,13 @@ const db = require("../database/connection");
 const User = {};
 
 User.findUsername = foundUsername => {
-  return db.one("SELECT * FROM users WHERE username = $1", [foundUsername]);
+  return db.one("SELECT * FROM user_table WHERE username = $1", [foundUsername]);
 };
 
-User.createNewUser = (newUser) => {
+User.createNewUser = (username, password) => {
   return db.one(
-    "INSERT INTO users (username, password) VALUES ($1, $2)",
-    [newUser.username, newUser.password]
+    "INSERT INTO user_table (username, password_digest) VALUES ($1, $2)",
+    [username, password]
   );
 };
 
