@@ -9,25 +9,25 @@ class Navbar extends Component {
 
         <li className="nav-item">
           <Link to="/" className="nav-link">
-            Home
+            HOME
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="/favorites/" className="nav-link">
-            Favorites
+            FAVORITES
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="/login" className="nav-link">
-            Login
+            LOGIN
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="/register" className="nav-link">
-            Register
+            REGISTER
           </Link>
         </li>
 
