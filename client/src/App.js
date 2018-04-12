@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import Register from "./Register";
+import Navbar from "./Navbar";
 import Login from "./Login";
+import Register from "./Register";
 import './App.css';
+
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class App extends Component {
   state = {
@@ -17,22 +20,37 @@ class App extends Component {
     });
   };
 
-
   render() {
     return (
-      <div className="App">
-        <Register onChange={fields => this.onChange(fields)} />
-        <p>
-          {JSON.stringify(this.state.fields, null, 2)}
-        </p>
+      <Router>
+        <div className="container">
+          <Navbar />
+          
+          <Route exact path="/login" component={Login} />
+          <Route path="/register" component={Register} />
 
-        <Login onChange={fields => this.onChange(fields)} />
-        <p>
-          {JSON.stringify(this.state.fields, null, 2)}
-        </p>
-      </div>
+        </div>
+      </Router>
     );
   }
-}
+  }
+
+//   render() {
+//     return (
+//       <div className="App">
+//         <Navbar />
+//         <Register onChange={fields => this.onChange(fields)} />
+//         <p>
+//           {JSON.stringify(this.state.fields, null, 2)}
+//         </p>
+//
+//         <Login onChange={fields => this.onChange(fields)} />
+//         <p>
+//           {JSON.stringify(this.state.fields, null, 2)}
+//         </p>
+//       </div>
+//     );
+//   }
+// }
 
 export default App;

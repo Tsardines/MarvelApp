@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./style.css";
 
 // home favorites login signup
 
-class SiteNav extends Component {
+class Navbar extends Component {
   render() {
     return (
       <ul className="nav">
@@ -42,4 +42,4 @@ class SiteNav extends Component {
   }
 }
 
-export default SiteNav;
+export default Navbar;
