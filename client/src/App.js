@@ -7,21 +7,6 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     fields: {}
-  //   }
-  // };
-
-  // onChange(updatedValue) {
-  //   this.setState({
-  //     fields: {
-  //       ...this.state.fields,
-  //       ...updatedValue
-  //     }
-  //   });
-  // };
 
   render() {
     return (
@@ -36,24 +21,7 @@ class App extends Component {
       </Router>
     );
   }
-  }
+}
 
-//   render() {
-//     return (
-//       <div className="App">
-//         <Navbar />
-//         <Register onChange={fields => this.onChange(fields)} />
-//         <p>
-//           {JSON.stringify(this.state.fields, null, 2)}
-//         </p>
-//
-//         <Login onChange={fields => this.onChange(fields)} />
-//         <p>
-//           {JSON.stringify(this.state.fields, null, 2)}
-//         </p>
-//       </div>
-//     );
-//   }
-// }
 
 export default App;
