@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Register from "./Register";
+import Login from "./Login";
 import './App.css';
 
 class App extends Component {
@@ -21,6 +22,11 @@ class App extends Component {
     return (
       <div className="App">
         <Register onChange={fields => this.onChange(fields)} />
+        <p>
+          {JSON.stringify(this.state.fields, null, 2)}
+        </p>
+
+        <Login onChange={fields => this.onChange(fields)} />
         <p>
           {JSON.stringify(this.state.fields, null, 2)}
         </p>

@@ -32,8 +32,6 @@ class Register extends React.Component {
     });
   }
 
-
-
   render() {
     return (
 
@@ -59,6 +57,5 @@ class Register extends React.Component {
   }
 
 }
-
 
 export default Register;
