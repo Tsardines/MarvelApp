@@ -1,56 +1,57 @@
 import React, { Component } from "react";
-// import {
-//   BrowserRouter as Router,
-//   Route,
-//   Link,
-//   Redirect
-// } from "react-router-dom";
-
 
 class Register extends React.Component {
-  state = {
-    username: "",
-    password: ""
-  };
 
-  change = e => {
-    this.props.onChange({ [e.target.name]: e.target.value });
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
-  onSubmit = e => {
-    e.preventDefault();
-    this.setState({
+  constructor(props) {
+    super(props);
+    this.state = {
       username: "",
-      password: ""
-    });
-    this.props.onChange({
-      username: "",
-      password: ""
-    });
+      password: "",
+      clickedRegister: false
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
   }
+
+
+  handleInputChange(evt) {
+    console.log(evt.target);
+    this.setState({
+      [evt.target.name]: evt.target.value
+    })
+  };
+
+  handleRegisterSubmit(evt) {
+    evt.preventDefault();
+    console.log('you clicked button');
+  };
 
   render() {
     return (
 
-      <form>
-        <input
-          name="username"
-          placeholder="Username"
-          value={this.state.username}
-          onChange={e => this.change(e)}
-        />
-        <br />
-        <input
-          name="password"
-          placeholder="Password"
-          value={this.state.password}
-          onChange={e => this.change(e)}
-        />
-        <br />
-        <button onClick={e => this.onSubmit(e)}>Create Account</button>
+      <form onSubmit={this.handleRegisterSubmit}>
+      <div>
+        <label>
+          Username
+          <input
+            name="username"
+            placeholder="Username"
+            value={this.state.username}
+            onChange={this.handleInputChange}
+          />
+          <br />
+        </label>
+        <label>
+          Password
+          <input
+            name="password"
+            placeholder="Password"
+            value={this.state.password}
+            onChange={this.handleInputChange}
+          />
+        </label>
+        </div>
+        <button>Register</button>
       </form>
 
     )

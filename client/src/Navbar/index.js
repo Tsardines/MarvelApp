@@ -33,7 +33,7 @@ class Navbar extends Component {
 
         <li className="nav-item">
           <Link to="/register" className="nav-link">
-            Sign Up
+            Register
           </Link>
         </li>
 

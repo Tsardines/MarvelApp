@@ -7,25 +7,28 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class App extends Component {
-  state = {
-    fields: {}
-  };
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     fields: {}
+  //   }
+  // };
 
-  onChange = updatedValue => {
-    this.setState({
-      fields: {
-        ...this.state.fields,
-        ...updatedValue
-      }
-    });
-  };
+  // onChange(updatedValue) {
+  //   this.setState({
+  //     fields: {
+  //       ...this.state.fields,
+  //       ...updatedValue
+  //     }
+  //   });
+  // };
 
   render() {
     return (
       <Router>
         <div className="container">
           <Navbar />
-          
+
           <Route exact path="/login" component={Login} />
           <Route path="/register" component={Register} />
 
