@@ -12,7 +12,12 @@ class CharacterPage extends Component {
       charactersLoaded: false
     };
     this.fetchCharacters = this.fetchCharacters.bind(this);
+    // this.handleCharacterClick = this.handleCharacterClick.bind(this);
   }
+
+  // handleCharacterClick(evt, name) {
+  //   console.log(name);
+  // }
 
   componentDidMount() {
     this.fetchCharacters();
@@ -37,11 +42,22 @@ class CharacterPage extends Component {
     }
 
     return (
-      <div className="character-page">
-        {/*        <h1>CHARACTER PAGE</h1>*/}
-        <CharacterList characters={this.state.characters} />
-        <CharacterDetail />
-      </div>
+      <Router>
+        <div className="character-page">
+          {/*        <h1>CHARACTER PAGE</h1>*/}
+          <CharacterList
+            onClick={this.handleCharacterClick}
+            characters={this.state.characters}
+          />
+          <Route
+            exact
+            path="/character/:id"
+            component={CharacterDetail}
+            match={this.props.match}
+          />
+          {/* <CharacterDetail /> */}
+        </div>
+      </Router>
     );
   }
 }

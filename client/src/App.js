@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import "isomorphic-fetch"
+import "isomorphic-fetch";
 import Navbar from "./Navbar";
 import Login from "./Login";
 import Register from "./Register";
 import CharacterPage from "./CharacterPage";
+import CharacterDetail from "./CharacterDetail";
 
 import "./App.css";
 
