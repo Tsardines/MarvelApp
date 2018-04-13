@@ -14,23 +14,22 @@ const MarvelData = require("./Models/MarvelData");
 const cors = require("cors");
 app.use(cors());
 
-//create function to generate time stamp & matching hash
+//need to create function to generate time stamp & matching hash
 
-app.get("/api/characters", (req, res) => {
-  MarvelData.getReponseAsJSON(
-    "http://gateway.marvel.com/v1/public/characters?apikey=c595c1f12b2db2191ce42b2a9360ba56&ts=1523454631254&hash=99a15b4f4557e89e9b94dea04c439bd5"
-  ).then(characters => {
-    res.json(characters);
-  });
+
+//get all characters from API
+app.get('/api/characters', (req, res) => {
+  MarvelData.getReponseAsJSON('http://gateway.marvel.com/v1/public/characters?apikey=c595c1f12b2db2191ce42b2a9360ba56&ts=1523454631254&hash=99a15b4f4557e89e9b94dea04c439bd5').then(characters => {
+    res.json(characters)
+  })
 });
 
-app.get("/api/characters/:id", (req, res) => {
-  const id = req.params.id;
-  MarvelData.getReponseAsJSON(
-    `http://gateway.marvel.com/v1/public/characters/${id}?apikey=c595c1f12b2db2191ce42b2a9360ba56&ts=1523454631254&hash=99a15b4f4557e89e9b94dea04c439bd5`
-  ).then(character => {
-    res.json(character);
-  });
+//get specific character by id from API
+app.get('/api/characters/:id', (req, res) => {
+  const id = req.params.id
+  MarvelData.getReponseAsJSON(`http://gateway.marvel.com/v1/public/characters/${id}?apikey=c595c1f12b2db2191ce42b2a9360ba56&ts=1523454631254&hash=99a15b4f4557e89e9b94dea04c439bd5`).then(character => {
+    res.json(character)
+  })
 });
 
 // LOGIN the user if their username and password are correct.
@@ -54,7 +53,9 @@ app.post("/user", urlencodedParser, (request, response) => {
   });
 });
 
-app.post("/signup", urlencodedParser, (request, response) => {
+
+//add new user and password to DB
+app.post('/signup', urlencodedParser, (request, response) => {
   // get pw entered by user
   const newUsername = request.body.username;
   const rawPassword = request.body.password;
@@ -63,6 +64,44 @@ app.post("/signup", urlencodedParser, (request, response) => {
   // create new user in db w/ hashed pw
   User.createNewUser(newUsername, rawPassword).then(
     response.send("You created a new user!")
+  );
+});
+
+//gets a specific user's favorite list
+app.get('/favorites/:user_id', urlencodedParser, (request, response) => {
+  const userId = request.params.user_id
+  FavoriteCharacter.findAll(userId).then(
+    response.send('These are all of user 1 favorites')
+  )
+});
+
+//adds a new character to a specific user's favorite list
+app.post('/favorites/:user_id/:character_id', urlencodedParser, (request, response) => {
+  const userId = request.params.user_id
+  const characterId = request.params.character_id
+  const notes = ''
+  FavoriteCharacter.createFavorite(userId, characterId, notes)
+  .then(
+    response.send('You created a new favorite')
+  )
+});
+
+//deletes a character from a specific user's favorite list
+app.delete('/favorites/:user_id/:character_id', urlencodedParser, (request, response) => {
+  const userId = request.params.user_id
+  const characterId = request.params.character_id
+  FavoriteCharacter.delete(userId, characterId).then(
+    response.send('You deleted user 1 favorite item')
+  )
+});
+
+//edits a character's note in a specific user's favorite list
+app.put("/favorites/edit/:user_id/:character_id", urlencodedParser, (request, response) => {
+  const editNoteData = request.body.notes
+  const userId = request.params.user_id
+  const characterId = request.params.character_id
+  FavoriteCharacter.edit(editNoteData, userId, characterId).then(
+    response.send('You edited your note')
   );
 });
 
