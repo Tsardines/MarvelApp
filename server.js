@@ -7,6 +7,7 @@ const session = require("express-session");
 const FileStore = require("session-file-store")(session);
 const bcrypt = require("bcryptjs");
 const salt = "$2a$10$7BfZk7868jGqY5fXtZrZ1e";
+const fetch = require("isomorphic-fetch");
 const FavoriteCharacter = require("./Models/FavoriteCharacter");
 const User = require("./Models/User");
 const MarvelCharacter = require("./Models/MarvelCharacter");
@@ -115,7 +116,7 @@ app.put("/favorite/edit/:user_id/:character_id", urlencodedParser, (request, res
 //add specific character to character DATABASE
 app.post("/api/character/favorite/:marvel_id", urlencodedParser, (request, response) => {
   const marvel_id = request.params.marvel_id
-  fetch(`http://gateway.marvel.com/v1/public/characters/${id}?apikey=${PUBLICKEY}&ts=${TS}&hash=${HASH}`)
+  fetch(`http://gateway.marvel.com/v1/public/characters/${marvel_id}?apikey=${PUBLICKEY}&ts=${TS}&hash=${HASH}`)
     .then(character => {
       character.json()
     .then(characterAsJSON => {
@@ -126,18 +127,9 @@ app.post("/api/character/favorite/:marvel_id", urlencodedParser, (request, respo
       //need to clean this up later using find method
     MarvelCharacter.addCharacterToDatabase(id, name, description, thumbnail, wiki_url)
     .then(
-      respnse.send('You added a character to the DB!')
+      response.send('You added a character to the DB!')
     )
   })})
-})
-
-app.post("/addcharacter/:marvel_id", urlencodedParser, (request, response) => {
-  const marvel_id = request.params.marvel_id
-  const {name, description, thumbnail, wiki_url} = request.body
-  MarvelCharacter.addCharacterToDatabase(marvel_id, name, description, thumbnail, wiki_url)
-  .then(
-    response.send('You added a character to the DB!')
-  )
 })
 
 app.listen(4567, () => console.log("Marvel server listening on port 4567!"));
