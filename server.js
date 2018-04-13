@@ -131,7 +131,9 @@ app.post('/favorite', jsonParser, (request, response) => {
               })
             })
           })
-}})});
+      }
+    })
+});
 
 //deletes a character from a specific user's favorite list
 app.delete('/favorite/:user_id/:character_id', urlencodedParser, (request, response) => {
