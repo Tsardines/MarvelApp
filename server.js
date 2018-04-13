@@ -88,15 +88,42 @@ app.get('/favorites/:user_id', urlencodedParser, (request, response) => {
 });
 
 //adds a new character to a specific user's favorite list
-app.post('/favorite/:user_id/:character_id', urlencodedParser, (request, response) => {
-  const userId = request.params.user_id
-  const characterId = request.params.character_id
+app.post('/favorite', jsonParser, (request, response) => {
+  const userId = request.body.user_id
+  const characterId = request.body.marvel_id
   const notes = ''
-  FavoriteCharacter.createFavorite(userId, characterId, notes)
-  .then(
-    response.send('You created a new favorite')
-  )
-});
+  console.log('USERID: ', userId);
+  console.log('MARVELID: ', characterId);
+  //check if character already exists in marvel_character
+  MarvelCharacter.getByMarvelId(characterId)
+    .then(character => {
+      console.log('HELLOOOOO')
+      //if character exists in marvel_character, Favorite.getFavorite()
+      if (character) {
+        //create favorite
+        FavoriteCharacter.createFavorite(userId, characterId, notes)
+          .then(
+            response.send('You created a new favorite')
+          )
+      }
+      //else if character does not exist in marvel_character
+      //ask api for the data
+      fetch(`http://gateway.marvel.com/v1/public/characters/${marvel_id}?apikey=${PUBLICKEY}&ts=${TS}&hash=${HASH}`)
+          .then(character => {
+            character.json()
+          .then(characterAsJSON => {
+            let character = characterAsJSON.data.results[0]
+            let {id, name, description, thumbnail, urls} = character
+            thumbnail = thumbnail.path + '.' + thumbnail.extension
+            let wiki_url = urls[1].url
+            //need to clean this up later using find method
+          //create character in marvel_character
+          MarvelCharacter.addCharacterToDatabase(id, name, description, thumbnail, wiki_url)
+          .then(character => {
+            //return the character
+            response.json(character)
+          })})
+})})});
 
 //deletes a character from a specific user's favorite list
 app.delete('/favorite/:user_id/:character_id', urlencodedParser, (request, response) => {
@@ -117,23 +144,4 @@ app.put("/favorite/edit/:user_id/:character_id", urlencodedParser, (request, res
   );
 });
 
-//add specific character to character DATABASE
-app.post("/api/character/favorite/:marvel_id", urlencodedParser, (request, response) => {
-  const marvel_id = request.params.marvel_id
-  fetch(`http://gateway.marvel.com/v1/public/characters/${marvel_id}?apikey=${PUBLICKEY}&ts=${TS}&hash=${HASH}`)
-    .then(character => {
-      character.json()
-    .then(characterAsJSON => {
-      let character = characterAsJSON.data.results[0]
-      let {id, name, description, thumbnail, urls} = character
-      thumbnail = thumbnail.path + '.' + thumbnail.extension
-      let wiki_url = urls[1].url
-      //need to clean this up later using find method
-    MarvelCharacter.addCharacterToDatabase(id, name, description, thumbnail, wiki_url)
-    .then(
-      response.send('You added a character to the DB!')
-    )
-  })})
-})
-
-app.listen(4567, () => console.log("Marvel server listening on port 4567!"));
+app.listen(4567, () => {console.log("Marvel server listening on port 4567!")});

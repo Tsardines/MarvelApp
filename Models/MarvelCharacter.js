@@ -2,6 +2,10 @@ const db = require("../database/connection");
 
 const MarvelCharacter = {};
 
+MarvelCharacter.getByMarvelId = (marvel_id) => {
+  return db.one(`SELECT * FROM marvel_character WHERE marvel_id = $1`, [marvel_id])
+}
+
 MarvelCharacter.addCharacterToDatabase = (marvel_id, name, description, thumbnail, wiki_url) => {
   return db.one(
     `INSERT INTO marvel_character (marvel_id, name, description, image_url, wiki_url)
