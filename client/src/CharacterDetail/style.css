@@ -1,4 +1,8 @@
 .character-detail-container {
+  background-color: green;
   color: white;
-  padding-right: 20px;
+  /* height: 100%; */
+  margin-right: 120px;
+  padding: 0 75px 50px 75px;
+  text-align: center;
 }
