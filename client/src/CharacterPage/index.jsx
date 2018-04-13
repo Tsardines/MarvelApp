@@ -21,12 +21,14 @@ class CharacterPage extends Component {
 
   fetchCharacters() {
     fetch("http://localhost:4567/api/characters")
-      // fetch("http://gateway.marvel.com/v1/public/characters?apikey=c595c1f12b2db2191ce42b2a9360ba56&ts=1523454631254&hash=99a15b4f4557e89e9b94dea04c439bd5&offset=0&limit=100")
       .then(response => response.json())
       .then(charactersAsJson => {
         let characters = charactersAsJson.data.results;
+        let charactersWithDescriptionsAndImages = characters.filter(character => {
+          return (character.description.length > 0 && !character.thumbnail.path.includes('image_not_available'));
+        });
         this.setState({
-          characters: characters,
+          characters: charactersWithDescriptionsAndImages,
           charactersLoaded: true
         });
       });
