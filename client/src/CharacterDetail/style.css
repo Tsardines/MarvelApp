@@ -1,3 +1,26 @@
-.character-detail-container img {
-  width: 300px;
+
+.character-detail-container {
+  color: black;
+  display: flex;
+/*   background-color: green;
+   */  /* height: 100%; */
+    padding: 0 75px 50px 75px;
+  flex-direction: column;
+}
+
+.char-name {
+  justify-content: center;
+  align-self: center;
+}
+
+.image {
+  height: 400px;
+  width: 400px;
+  padding-bottom: 20px;
+  align-self: center;
+}
+
+.description {
+
+  align-self: center;
 }

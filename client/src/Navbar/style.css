@@ -1,4 +1,17 @@
-.nav {
-  display: flex;
-  justify-content: space-evenly;
+.Brand {
+/*   background-image: url("../assets/marvel-char-finder-logo.gif"); */
+}
+
+.ml-auto {
+  padding: 5px 20px 5px 5px;
+  text-decoration: none;
+}
+
+.NavLinkClass:hover {
+  color: red;
+}
+
+.NavbarClass {
+  background-color: black;
+  width: 100%;
 }

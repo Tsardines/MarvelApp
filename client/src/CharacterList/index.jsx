@@ -41,7 +41,7 @@ class CharacterList extends Component {
 
     return (
       <div className="character-list-container">
-        <h1>CHARACTER LIST</h1>
+        <h3>CHARACTER LIST</h3>
         <div className="filter-bar">
           <CharacterListFilter
             // characterData={characterItems}
