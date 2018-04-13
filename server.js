@@ -38,9 +38,9 @@ app.post('/signup', urlencodedParser, (request, response) => {
   const newUsername = request.body.username;
   const rawPassword = request.body.password;
   // salt and hash password
-  // let hashedPassword = bcrypt.hashSync(rawPassword, salt);
+  let hashedPassword = bcrypt.hashSync(rawPassword, salt);
   // create new user in db w/ hashed pw
-  User.createNewUser(newUsername, rawPassword).then(
+  User.createNewUser(newUsername, hashedPassword).then(
     response.send("You created a new user!")
   );
 });
@@ -50,11 +50,12 @@ app.post('/signup', urlencodedParser, (request, response) => {
 app.post("/login", urlencodedParser, (request, response) => {
   const enteredUsername = request.body.username;
   const enteredPassword = request.body.password;
-  // // let hashedEnteredPassword = bcrypt.hashSync(enteredPassword, salt);
   User.findUsername(enteredUsername).then(validUserInfo => {
     const usernameIsMatch = enteredUsername === validUserInfo.username;
-    // let pwIsMatch = bcrypt.compareSync(enteredPassword, validUserInfo.password);
-    const pwIsMatch = enteredPassword === validUserInfo.password_digest;
+    let pwIsMatch = bcrypt.compareSync(enteredPassword, validUserInfo.password_digest);
+    //Alternate way of doing the password checking:
+      // let hashedEnteredPassword = bcrypt.hashSync(enteredPassword, salt);
+      // const pwIsMatch = hashedEnteredPassword === validUserInfo.password_digest;
     if (pwIsMatch && usernameIsMatch) {
       // request.session.authenticated = true;
       // request.session.userId = validUserInfo.id;
