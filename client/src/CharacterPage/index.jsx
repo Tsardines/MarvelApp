@@ -24,11 +24,11 @@ class CharacterPage extends Component {
       .then(response => response.json())
       .then(charactersAsJson => {
         let characters = charactersAsJson.data.results;
-        let charactersWithDescriptions = characters.filter(character => {
+        let charactersWithDescriptionsAndImages = characters.filter(character => {
           return (character.description.length > 0 && !character.thumbnail.path.includes('image_not_available'));
         });
         this.setState({
-          characters: charactersWithDescriptions,
+          characters: charactersWithDescriptionsAndImages,
           charactersLoaded: true
         });
       });
