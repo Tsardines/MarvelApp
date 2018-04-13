@@ -7,6 +7,7 @@ const session = require("express-session");
 const FileStore = require("session-file-store")(session);
 const bcrypt = require("bcryptjs");
 const salt = "$2a$10$7BfZk7868jGqY5fXtZrZ1e";
+const fetch = require("isomorphic-fetch");
 const FavoriteCharacter = require("./Models/FavoriteCharacter");
 const User = require("./Models/User");
 const MarvelCharacter = require("./Models/MarvelCharacter");
@@ -29,7 +30,7 @@ app.get('/api/characters', (req, res) => {
 });
 
 //get specific character by id from API
-app.get('/api/characters/:id', (req, res) => {
+app.get('/api/character/:id', (req, res) => {
   const id = req.params.id
   MarvelData.getReponseAsJSON(`http://gateway.marvel.com/v1/public/characters/${id}?apikey=${PUBLICKEY}&ts=${TS}&hash=${HASH}`).then(character => {
     res.json(character)
@@ -83,7 +84,7 @@ app.get('/favorites/:user_id', urlencodedParser, (request, response) => {
 });
 
 //adds a new character to a specific user's favorite list
-app.post('/favorites/:user_id/:character_id', urlencodedParser, (request, response) => {
+app.post('/favorite/:user_id/:character_id', urlencodedParser, (request, response) => {
   const userId = request.params.user_id
   const characterId = request.params.character_id
   const notes = ''
@@ -94,7 +95,7 @@ app.post('/favorites/:user_id/:character_id', urlencodedParser, (request, respon
 });
 
 //deletes a character from a specific user's favorite list
-app.delete('/favorites/:user_id/:character_id', urlencodedParser, (request, response) => {
+app.delete('/favorite/:user_id/:character_id', urlencodedParser, (request, response) => {
   const userId = request.params.user_id
   const characterId = request.params.character_id
   FavoriteCharacter.delete(userId, characterId).then(
@@ -103,7 +104,7 @@ app.delete('/favorites/:user_id/:character_id', urlencodedParser, (request, resp
 });
 
 //edits a character's note in a specific user's favorite list
-app.put("/favorites/edit/:user_id/:character_id", urlencodedParser, (request, response) => {
+app.put("/favorite/edit/:user_id/:character_id", urlencodedParser, (request, response) => {
   const editNoteData = request.body.notes
   const userId = request.params.user_id
   const characterId = request.params.character_id
@@ -111,5 +112,24 @@ app.put("/favorites/edit/:user_id/:character_id", urlencodedParser, (request, re
     response.send('You edited your note')
   );
 });
+
+//add specific character to character DATABASE
+app.post("/api/character/favorite/:marvel_id", urlencodedParser, (request, response) => {
+  const marvel_id = request.params.marvel_id
+  fetch(`http://gateway.marvel.com/v1/public/characters/${marvel_id}?apikey=${PUBLICKEY}&ts=${TS}&hash=${HASH}`)
+    .then(character => {
+      character.json()
+    .then(characterAsJSON => {
+      let character = characterAsJSON.data.results[0]
+      let {id, name, description, thumbnail, urls} = character
+      thumbnail = thumbnail.path + '.' + thumbnail.extension
+      let wiki_url = urls[1].url
+      //need to clean this up later using find method
+    MarvelCharacter.addCharacterToDatabase(id, name, description, thumbnail, wiki_url)
+    .then(
+      response.send('You added a character to the DB!')
+    )
+  })})
+})
 
 app.listen(4567, () => console.log("Marvel server listening on port 4567!"));
