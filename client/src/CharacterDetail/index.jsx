@@ -5,27 +5,25 @@ class CharacterDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      characterData: {},
-      characterLoaded: false,
-      characterId: this.props.match.params.id
+      characterData: null
     };
   }
 
   componentDidMount() {
-    console.log("componentDidMount");
-    this.fetchCharacterById();
+    let { id } = this.props.match.params;
+    console.log(`componentDidMount with match.params.id= ${id}`)
+    this.fetchCharacterById(id);
   }
 
   componentDidUpdate() {
-    console.log("componentDidUpdate");
-    if (this.state.characterId !== Number(this.props.match.params.id)) {
-      this.updateData();
+    console.log(`componentDidUpdate, match.params.id = ${this.props.match.params.id}`);
+    if (this.state.characterData.id != this.props.match.params.id) {
+      this.fetchCharacterById(this.props.match.params.id);
     }
   }
 
-  fetchCharacterById() {
-    // console.log("fetch happened");
-    fetch(`http://localhost:4567/api/characters/${this.state.characterId}`)
+  fetchCharacterById(id) {
+    fetch(`http://localhost:4567/api/characters/${id}`)
       .then(response => response.json())
       .then(response => {
         console.log(response);
@@ -36,31 +34,23 @@ class CharacterDetail extends Component {
       });
   }
 
-  updateData() {
-    this.setState({
-      characterId: Number(this.props.match.params.id)
-    });
-    this.fetchCharacterById();
-  }
 
   render() {
-    if (this.state.characterLoaded) {
-      let { name, description, thumbnail } = this.state.characterData;
-      thumbnail =
-        this.state.characterData.thumbnail.path +
-        "." +
-        this.state.characterData.thumbnail.extension;
-      return (
-        <div className="character-detail-container">
-          <h1>CHARACTER DETAIL</h1>
-          <h3>{name}</h3>
-          <img src={thumbnail} />
-          <p> {description}</p>
-        </div>
-      );
-    } else {
-      return <p>Loading...</p>;
+    if (!this.state.characterData) {
+      return <h4>Loading...</h4>
     }
+
+    let { name, description, thumbnail } = this.state.characterData;
+    thumbnail = `${thumbnail.path}.${thumbnail.extension}`;
+
+    return (
+      <div className="character-detail-container">
+        <h1>CHARACTER DETAIL</h1>
+        <h3>{name}</h3>
+        <img src={thumbnail} />
+        <p> {description}</p>
+      </div>
+    );
   }
 }
 

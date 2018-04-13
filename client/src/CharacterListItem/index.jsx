@@ -9,7 +9,6 @@ class CharacterListItem extends Component {
       <div className="character-list-item">
         <li>{name}</li>
         <img
-          // onClick={evt => this.props.onClick(evt, name)}
           src={thumbnail}
           className="thumbnail"
         />

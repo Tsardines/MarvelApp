@@ -44,18 +44,15 @@ class CharacterPage extends Component {
     return (
       <Router>
         <div className="character-page">
-          {/*        <h1>CHARACTER PAGE</h1>*/}
           <CharacterList
-            onClick={this.handleCharacterClick}
             characters={this.state.characters}
           />
           <Route
             exact
             path="/character/:id"
-            component={CharacterDetail}
-            match={this.props.match}
+            render={ ({match}) =>
+            <CharacterDetail match={match} refreshWines={this.refreshWines}/>}
           />
-          {/* <CharacterDetail /> */}
         </div>
       </Router>
     );

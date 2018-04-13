@@ -9,9 +9,8 @@ class CharacterList extends Component {
     let characterItems = characters.map(character => (
       <Link to={`/character/${character.id}`}>
         <CharacterListItem
-          // onClick={this.props.onClick}
           characterData={character}
-          key={character.name}
+          key={character.id}
         />
       </Link>
     ));
