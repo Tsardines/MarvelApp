@@ -43,10 +43,10 @@ class CharacterDetail extends Component {
 
     return (
       <div className="character-detail-container">
-        <h1>CHARACTER DETAIL</h1>
-        <h3>{name}</h3>
-        <img src={thumbnail} />
-        <p> {description}</p>
+        <br/>
+        <h5 className="char-name">{name}</h5>
+        <img className="image" src={thumbnail} />
+        <p className="description"> {description}</p>
       </div>
     );
   }

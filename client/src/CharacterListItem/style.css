@@ -1,3 +1,11 @@
 .thumbnail {
   width: 100px;
 }
+
+.character-list-item {
+
+}
+
+ul {
+  float: left;
+}

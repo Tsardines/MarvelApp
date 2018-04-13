@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./style.css";
+import "../index.css";
 import {
   Collapse,
   Navbar,
@@ -22,7 +23,7 @@ import {
       return (
         <div>
           <Navbar className="NavbarClass" expand="md">
-            <NavbarBrand className="Brand" href="/">Marvel Character Finder</NavbarBrand>
+            <NavbarBrand className="Brand" href="/"> MARVEL CHARACTER FINDER</NavbarBrand>
 
               <Nav className="ml-auto" navbar>
                 <NavItem>

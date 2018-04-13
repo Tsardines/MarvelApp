@@ -1,14 +1,13 @@
 .Brand {
-  font-size: 70px;
+/*   background-image: url("../assets/marvel-char-finder-logo.gif"); */
 }
 
 .ml-auto {
-  color: red;
   padding: 5px 20px 5px 5px;
   text-decoration: none;
 }
 
-.ml-auto:hover {
+.NavLinkClass:hover {
   color: red;
 }
 

@@ -1,8 +1,26 @@
 
 .character-detail-container {
   color: black;
-  /* height: 100%; */
-  margin-right: 120px;
-  padding: 0 75px 50px 75px;
-  text-align: center;
+  display: flex;
+/*   background-color: green;
+   */  /* height: 100%; */
+    padding: 0 75px 50px 75px;
+  flex-direction: column;
+}
 
+.char-name {
+  justify-content: center;
+  align-self: center;
+}
+
+.image {
+  height: 400px;
+  width: 400px;
+  padding-bottom: 20px;
+  align-self: center;
+}
+
+.description {
+
+  align-self: center;
+}
