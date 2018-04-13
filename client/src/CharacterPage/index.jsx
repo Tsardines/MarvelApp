@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import CharacterList from "../CharacterList";
 import CharacterDetail from "../CharacterDetail";
+import CharacterListFilter from "../CharacterListFilter";
 import "./style.css";
 
 class CharacterPage extends Component {
@@ -39,14 +40,11 @@ class CharacterPage extends Component {
     return (
       <Router>
         <div className="character-page">
-          <CharacterList
-            characters={this.state.characters}
-          />
+          <CharacterList characters={this.state.characters} />
           <Route
             exact
             path="/character/:id"
-            render={ ({match}) =>
-            <CharacterDetail match={match} refreshWines={this.refreshWines}/>}
+            render={({ match }) => <CharacterDetail match={match} />}
           />
         </div>
       </Router>
