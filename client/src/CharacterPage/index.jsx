@@ -12,12 +12,7 @@ class CharacterPage extends Component {
       charactersLoaded: false
     };
     this.fetchCharacters = this.fetchCharacters.bind(this);
-    // this.handleCharacterClick = this.handleCharacterClick.bind(this);
   }
-
-  // handleCharacterClick(evt, name) {
-  //   console.log(name);
-  // }
 
   componentDidMount() {
     this.fetchCharacters();

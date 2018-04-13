@@ -11,13 +11,12 @@ class CharacterDetail extends Component {
 
   componentDidMount() {
     let { id } = this.props.match.params;
-    console.log(`componentDidMount with match.params.id= ${id}`)
     this.fetchCharacterById(id);
   }
 
   componentDidUpdate() {
-    console.log(`componentDidUpdate, match.params.id = ${this.props.match.params.id}`);
-    if (this.state.characterData.id != this.props.match.params.id) {
+    let { id } = this.props.match.params;
+    if (this.state.characterData.id != id) {
       this.fetchCharacterById(this.props.match.params.id);
     }
   }
@@ -33,7 +32,6 @@ class CharacterDetail extends Component {
         });
       });
   }
-
 
   render() {
     if (!this.state.characterData) {
