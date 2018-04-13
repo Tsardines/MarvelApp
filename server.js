@@ -36,9 +36,9 @@ app.get('/api/characters/:offset', (request, response) => {
 
 //get specific character by id from API
 app.get('/api/character/:id', (request, response) => {
-  const id = req.params.id
+  const id = request.params.id
   MarvelData.getReponseAsJSON(`http://gateway.marvel.com/v1/public/characters/${id}?${generateAPIstring()}`).then(character => {
-    res.json(character)
+    response.json(character)
   })
 });
 
