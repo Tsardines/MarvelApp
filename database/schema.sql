@@ -19,7 +19,7 @@ CREATE TABLE marvel_character (
   -- id BIGSERIAL PRIMARY KEY,
   marvel_id INTEGER PRIMARY KEY,
   name VARCHAR(255),
-  description VARCHAR(255),
+  description TEXT,
   image_url VARCHAR(255),
   wiki_url VARCHAR(255)
 );
