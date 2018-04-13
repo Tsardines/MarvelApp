@@ -13,12 +13,17 @@ const MarvelCharacter = require("./Models/MarvelCharacter");
 const MarvelData = require("./Models/MarvelData");
 const cors = require("cors");
 app.use(cors());
+const md5 = require('md5');
 
-//need to create function to generate time stamp & matching hash
+//API required strings: timestamp, md5 hash, private key, public key
+const TS = new Date().getTime();
+const PRIVATEKEY = 'd29f491c23cfe6990c45739e5fdf11e1e6adfc3e'; //catherine's privatekey
+const PUBLICKEY = 'c595c1f12b2db2191ce42b2a9360ba56'; //catherine's publickey
+const HASH = md5(TS + PRIVATEKEY + PUBLICKEY).toString();
 
 //get all characters from API
 app.get('/api/characters', (req, res) => {
-  MarvelData.getReponseAsJSON('http://gateway.marvel.com/v1/public/characters?apikey=c595c1f12b2db2191ce42b2a9360ba56&ts=1523454631254&hash=99a15b4f4557e89e9b94dea04c439bd5').then(characters => {
+  MarvelData.getReponseAsJSON(`http://gateway.marvel.com/v1/public/characters?apikey=${PUBLICKEY}&ts=${TS}&hash=${HASH}`).then(characters => {
     res.json(characters)
   })
 });
@@ -26,7 +31,7 @@ app.get('/api/characters', (req, res) => {
 //get specific character by id from API
 app.get('/api/characters/:id', (req, res) => {
   const id = req.params.id
-  MarvelData.getReponseAsJSON(`http://gateway.marvel.com/v1/public/characters/${id}?apikey=c595c1f12b2db2191ce42b2a9360ba56&ts=1523454631254&hash=99a15b4f4557e89e9b94dea04c439bd5`).then(character => {
+  MarvelData.getReponseAsJSON(`http://gateway.marvel.com/v1/public/characters/${id}?apikey=${PUBLICKEY}&ts=${TS}&hash=${HASH}`).then(character => {
     res.json(character)
   })
 });
