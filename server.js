@@ -26,15 +26,16 @@ function generateAPIstring() {
   return APIstring;
 }
 
-//get all characters from API
-app.get('/api/characters', (req, res) => {
-  MarvelData.getReponseAsJSON(`http://gateway.marvel.com/v1/public/characters?${generateAPIstring()}&offset=0&limit=100`).then(characters => {
-    res.json(characters)
+//get first 100 characters from API
+app.get('/api/characters/:offset', (request, response) => {
+  let offset = request.params.offset;
+  MarvelData.getReponseAsJSON(`http://gateway.marvel.com/v1/public/characters?${generateAPIstring()}&offset=${offset}&limit=100`).then(characters => {
+    response.json(characters)
   })
 });
 
 //get specific character by id from API
-app.get('/api/character/:id', (req, res) => {
+app.get('/api/character/:id', (request, response) => {
   const id = req.params.id
   MarvelData.getReponseAsJSON(`http://gateway.marvel.com/v1/public/characters/${id}?${generateAPIstring()}`).then(character => {
     res.json(character)

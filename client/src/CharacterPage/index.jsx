@@ -10,7 +10,8 @@ class CharacterPage extends Component {
     super(props);
     this.state = {
       characters: [],
-      charactersLoaded: false
+      charactersLoaded: false,
+      offset: 0
     };
     this.fetchCharacters = this.fetchCharacters.bind(this);
   }
@@ -20,7 +21,8 @@ class CharacterPage extends Component {
   }
 
   fetchCharacters() {
-    fetch("http://localhost:4567/api/characters")
+    let offset = this.state.offset
+    fetch(`http://localhost:4567/api/characters/${offset}`)
       .then(response => response.json())
       .then(charactersAsJson => {
         let characters = charactersAsJson.data.results;
