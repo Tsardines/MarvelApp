@@ -22,7 +22,7 @@ class CharacterDetail extends Component {
   }
 
   fetchCharacterById(id) {
-    fetch(`http://localhost:4567/api/characters/${id}`)
+    fetch(`http://localhost:4567/api/character/${id}`)
       .then(response => response.json())
       .then(response => {
         console.log(response);

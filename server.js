@@ -24,7 +24,7 @@ const HASH = md5(TS + PRIVATEKEY + PUBLICKEY).toString();
 
 //get all characters from API
 app.get('/api/characters', (req, res) => {
-  MarvelData.getReponseAsJSON(`http://gateway.marvel.com/v1/public/characters?apikey=${PUBLICKEY}&ts=${TS}&hash=${HASH}`).then(characters => {
+  MarvelData.getReponseAsJSON(`http://gateway.marvel.com/v1/public/characters?apikey=${PUBLICKEY}&ts=${TS}&hash=${HASH}&offset=0&limit=100`).then(characters => {
     res.json(characters)
   })
 });
