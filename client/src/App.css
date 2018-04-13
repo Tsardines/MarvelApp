@@ -3,5 +3,6 @@
 @import url('https://fonts.googleapis.com/css?family=NotoSans:400,700');
 
 body {
+  background-color: black;
   font-family: 'Noto Sans', sans-serif;
 }

@@ -1,9 +1,24 @@
-.character-cell-container ul {
-    overflow: auto;
-    height: 100%;
-}
-
 .character-cell-container {
+  background-color: black;
+  color: white;
   height: 80vh;
+  padding-left: 25%;
+  padding-top: 10px;
 }
 
+.character-cell-container ul {
+  color: white;
+  font-size: 30px;
+  height: 100%;
+  list-style-type: none;
+  overflow: auto;
+  padding-bottom: 20px;
+}
+
+.character-list-container {
+  color: white;
+}
+
+h1 {
+  padding-left: 25%;
+}
