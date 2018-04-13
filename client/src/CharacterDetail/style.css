@@ -1,3 +1,8 @@
-.character-detail-container img {
-  width: 300px;
-}
+
+.character-detail-container {
+  color: black;
+  /* height: 100%; */
+  margin-right: 120px;
+  padding: 0 75px 50px 75px;
+  text-align: center;
+

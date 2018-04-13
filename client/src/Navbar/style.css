@@ -1,4 +1,18 @@
-.nav {
-  display: flex;
-  justify-content: space-evenly;
+.Brand {
+  font-size: 70px;
+}
+
+.ml-auto {
+  color: red;
+  padding: 5px 20px 5px 5px;
+  text-decoration: none;
+}
+
+.ml-auto:hover {
+  color: red;
+}
+
+.NavbarClass {
+  background-color: black;
+  width: 100%;
 }
