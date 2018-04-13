@@ -16,7 +16,6 @@ app.use(cors());
 
 //need to create function to generate time stamp & matching hash
 
-
 //get all characters from API
 app.get('/api/characters', (req, res) => {
   MarvelData.getReponseAsJSON('http://gateway.marvel.com/v1/public/characters?apikey=c595c1f12b2db2191ce42b2a9360ba56&ts=1523454631254&hash=99a15b4f4557e89e9b94dea04c439bd5').then(characters => {
@@ -32,8 +31,23 @@ app.get('/api/characters/:id', (req, res) => {
   })
 });
 
+
+//SIGNUP - add new user and password to DB
+app.post('/signup', urlencodedParser, (request, response) => {
+  // get pw entered by user
+  const newUsername = request.body.username;
+  const rawPassword = request.body.password;
+  // salt and hash password
+  // let hashedPassword = bcrypt.hashSync(rawPassword, salt);
+  // create new user in db w/ hashed pw
+  User.createNewUser(newUsername, rawPassword).then(
+    response.send("You created a new user!")
+  );
+});
+
+
 // LOGIN the user if their username and password are correct.
-app.post("/user", urlencodedParser, (request, response) => {
+app.post("/login", urlencodedParser, (request, response) => {
   const enteredUsername = request.body.username;
   const enteredPassword = request.body.password;
   // // let hashedEnteredPassword = bcrypt.hashSync(enteredPassword, salt);
@@ -53,25 +67,12 @@ app.post("/user", urlencodedParser, (request, response) => {
   });
 });
 
-
-//add new user and password to DB
-app.post('/signup', urlencodedParser, (request, response) => {
-  // get pw entered by user
-  const newUsername = request.body.username;
-  const rawPassword = request.body.password;
-  // salt and hash password
-  // let hashedPassword = bcrypt.hashSync(rawPassword, salt);
-  // create new user in db w/ hashed pw
-  User.createNewUser(newUsername, rawPassword).then(
-    response.send("You created a new user!")
-  );
-});
-
 //gets a specific user's favorite list
 app.get('/favorites/:user_id', urlencodedParser, (request, response) => {
   const userId = request.params.user_id
-  FavoriteCharacter.findAll(userId).then(
-    response.send('These are all of user 1 favorites')
+  FavoriteCharacter.findAll(userId).then( favorites => {
+      response.send(favorites)
+    }
   )
 });
 
@@ -91,7 +92,7 @@ app.delete('/favorites/:user_id/:character_id', urlencodedParser, (request, resp
   const userId = request.params.user_id
   const characterId = request.params.character_id
   FavoriteCharacter.delete(userId, characterId).then(
-    response.send('You deleted user 1 favorite item')
+    response.send('You deleted users favorite item')
   )
 });
 

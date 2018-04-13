@@ -1,4 +1,7 @@
+-- to run this in terminal: $ psql -f ./database/seed.sql
+
 \c marvel_app;
+
 INSERT INTO user_table (username, password_digest)
 VALUES ('ewok', 'password');
 
