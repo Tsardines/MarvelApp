@@ -16,8 +16,8 @@ CREATE TABLE user_table (
 );
 
 CREATE TABLE marvel_character (
-  id BIGSERIAL PRIMARY KEY,
-  marvel_id INTEGER,
+  -- id BIGSERIAL PRIMARY KEY,
+  marvel_id INTEGER PRIMARY KEY,
   name VARCHAR(255),
   description VARCHAR(255),
   image_url VARCHAR(255),
@@ -27,6 +27,6 @@ CREATE TABLE marvel_character (
 CREATE TABLE favorite_character (
   id BIGSERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES user_table(id),
-  character_id INTEGER REFERENCES marvel_character(id),
+  character_id INTEGER REFERENCES marvel_character(marvel_id),
   notes VARCHAR(255)
 );
