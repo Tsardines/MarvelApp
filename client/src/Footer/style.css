@@ -1,0 +1,14 @@
+.footer {
+  background-color: red;
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+  margin: 0 auto;
+}
+
+.footer-block {
+  width: 150px; height: 120px; -webkit-transform: skew(-10deg); -moz-transform: skew(20deg); -o-transform: skew(20deg); background: green;
+
+
+  padding: 10px;
+}
