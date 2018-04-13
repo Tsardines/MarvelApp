@@ -1,9 +1,8 @@
-/* import font */
 
-@import url('https://fonts.googleapis.com/css?family=NotoSans:400,700');
+
 
 body {
   background-color: white;
   color: white;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Passion One', cursive;
 }

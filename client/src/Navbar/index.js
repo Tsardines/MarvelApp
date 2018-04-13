@@ -16,40 +16,29 @@ import {
 
 
   class Bar extends React.Component {
-    constructor(props) {
-      super(props);
 
-      this.toggle = this.toggle.bind(this);
-      this.state = {
-        isOpen: false
-      };
-    }
-    toggle() {
-      this.setState({
-        isOpen: !this.state.isOpen
-      });
-    }
+
     render() {
       return (
         <div>
-          <Navbar color="dark" expand="md">
-            <NavbarBrand href="/">Marvel Character Finder</NavbarBrand>
+          <Navbar className="NavbarClass" expand="md">
+            <NavbarBrand className="Brand" href="/">Marvel Character Finder</NavbarBrand>
 
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <NavLink href="/">Home</NavLink>
+                  <NavLink className="NavLinkClass" href="/">Home</NavLink>
                 </NavItem>
 
                 <NavItem>
-                  <NavLink href="/favorites">Favorites</NavLink>
+                  <NavLink className="NavLinkClass" href="/favorites">Favorites</NavLink>
                 </NavItem>
 
                 <NavItem>
-                  <NavLink href="/login">Login</NavLink>
+                  <NavLink className="NavLinkClass" href="/login">Login</NavLink>
                 </NavItem>
 
                 <NavItem>
-                  <NavLink href="/register">Register</NavLink>
+                  <NavLink className="NavLinkClass" href="/register">Register</NavLink>
                 </NavItem>
               </Nav>
             </Navbar>
