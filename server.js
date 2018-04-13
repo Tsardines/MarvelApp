@@ -90,16 +90,16 @@ app.get('/favorites/:user_id', urlencodedParser, (request, response) => {
 //adds a new character to a specific user's favorite list
 app.post('/favorite', jsonParser, (request, response) => {
   const userId = request.body.user_id
-  const characterId = request.body.marvel_id
+  const characterId = Number(request.body.marvel_id)
   const notes = ''
   console.log('USERID: ', userId);
   console.log('MARVELID: ', characterId);
   //check if character already exists in marvel_character
   MarvelCharacter.getByMarvelId(characterId)
     .then(character => {
-      console.log('HELLOOOOO')
+      console.log(character);
       //if character exists in marvel_character, Favorite.getFavorite()
-      if (character) {
+      if (character.length > 0) {
         //create favorite
         FavoriteCharacter.createFavorite(userId, characterId, notes)
           .then(
@@ -108,22 +108,30 @@ app.post('/favorite', jsonParser, (request, response) => {
       }
       //else if character does not exist in marvel_character
       //ask api for the data
-      fetch(`http://gateway.marvel.com/v1/public/characters/${marvel_id}?apikey=${PUBLICKEY}&ts=${TS}&hash=${HASH}`)
-          .then(character => {
-            character.json()
-          .then(characterAsJSON => {
-            let character = characterAsJSON.data.results[0]
-            let {id, name, description, thumbnail, urls} = character
-            thumbnail = thumbnail.path + '.' + thumbnail.extension
-            let wiki_url = urls[1].url
-            //need to clean this up later using find method
-          //create character in marvel_character
-          MarvelCharacter.addCharacterToDatabase(id, name, description, thumbnail, wiki_url)
-          .then(character => {
-            //return the character
-            response.json(character)
-          })})
-})})});
+      else {
+        console.log('about to fetch');
+        fetch(`http://gateway.marvel.com/v1/public/characters/${characterId}?${generateAPIstring()}`)
+            .then(character => {
+              console.log('character back from api: ', character);
+              character.json()
+            .then(characterAsJSON => {
+              let character = characterAsJSON.data.results[0]
+              let {id, name, description, thumbnail, urls} = character;
+              thumbnail = thumbnail.path + '.' + thumbnail.extension;
+              let wiki_url = urls[1].url;
+              id = Number(id);
+              //need to clean this up later using find method
+            //create character in marvel_character
+            MarvelCharacter.addCharacterToDatabase(id, name, description, thumbnail, wiki_url)
+            .then(character => {
+                  FavoriteCharacter.createFavorite(userId, characterId, notes)
+                    .then(
+                      response.send('You created a new favorite')
+                    )
+              })
+            })
+          })
+}})});
 
 //deletes a character from a specific user's favorite list
 app.delete('/favorite/:user_id/:character_id', urlencodedParser, (request, response) => {
