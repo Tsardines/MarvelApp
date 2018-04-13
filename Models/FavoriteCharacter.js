@@ -2,10 +2,10 @@ const db = require("../database/connection");
 
 const FavoriteCharacter = {};
 
-FavoriteCharacter.createFavorite = (user_id, character_id) => {
+FavoriteCharacter.createFavorite = (user_id, character_id, notes) => {
   return db.one(
-    "INSERT INTO favorite_character (user_id, character_id) VALUES ($1, $2) RETURNING *",
-    [user_id, character_id]
+    "INSERT INTO favorite_character (user_id, character_id, notes) VALUES ($1, $2, $3) RETURNING *",
+    [user_id, character_id, notes]
   );
 };
 
@@ -20,13 +20,14 @@ FavoriteCharacter.findFavoriteByUserIdAndCharacterId = (user_id, character_id) =
   ]);
 };
 
-FavoriteCharacter.delete = id => {
-  return db.result("DELETE FROM favorite_character WHERE id = $1", [id]);
+FavoriteCharacter.delete = (user_id, character_id) => {
+  return db.result("DELETE FROM favorite_character WHERE user_id = $1 AND character_id = $2", [user_id, character_id]);
 };
 
-FavoriteCharacter.edit = (editNoteData, character_id) => {
-  return db.none("UPDATE favorite_character SET notes = $1 WHERE character_id = $2", [
+FavoriteCharacter.edit = (editNoteData, user_id, character_id) => {
+  return db.none("UPDATE favorite_character SET notes = $1 WHERE user_id = $2 AND character_id = $3", [
     editNoteData,
+    user_id,
     character_id
   ]);
 };

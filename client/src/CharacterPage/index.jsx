@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import CharacterList from "../CharacterList";
 import CharacterDetail from "../CharacterDetail";
+import CharacterListFilter from "../CharacterListFilter";
 import "./style.css";
 
 class CharacterPage extends Component {
@@ -10,7 +11,7 @@ class CharacterPage extends Component {
     this.state = {
       characters: [],
       charactersLoaded: false
-    }
+    };
     this.fetchCharacters = this.fetchCharacters.bind(this);
   }
 
@@ -19,34 +20,38 @@ class CharacterPage extends Component {
   }
 
   fetchCharacters() {
-    fetch("http://gateway.marvel.com/v1/public/characters?apikey=c595c1f12b2db2191ce42b2a9360ba56&ts=1523454631254&hash=99a15b4f4557e89e9b94dea04c439bd5&offset=0&limit=100")
+    fetch("http://localhost:4567/api/characters")
       .then(response => response.json())
       .then(charactersAsJson => {
         let characters = charactersAsJson.data.results;
+        let charactersWithDescriptionsAndImages = characters.filter(character => {
+          return (character.description.length > 0 && !character.thumbnail.path.includes('image_not_available'));
+        });
         this.setState({
-          characters: characters,
+          characters: charactersWithDescriptionsAndImages,
           charactersLoaded: true
-        })
-      })
-
+        });
+      });
   }
 
-
   render() {
-
     if (!this.state.charactersLoaded) {
-      return <div>Loading...</div>
+      return <div>Loading...</div>;
     }
 
     return (
-      <div className="character-page">
-{/*        <h1>CHARACTER PAGE</h1>*/}
-        <CharacterList characters={this.state.characters}/>
-        <CharacterDetail />
-      </div>
-    )
+      <Router>
+        <div className="character-page">
+          <CharacterList characters={this.state.characters} />
+          <Route
+            exact
+            path="/character/:id"
+            render={({ match }) => <CharacterDetail match={match} />}
+          />
+        </div>
+      </Router>
+    );
   }
-
 }
 
 export default CharacterPage;
