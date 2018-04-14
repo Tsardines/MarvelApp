@@ -11,6 +11,29 @@ class CharacterDetail extends Component {
     this.handleFavoriteClick = this.handleFavoriteClick.bind(this);
   }
 
+  componentDidMount() {
+    let { id } = this.props.match.params;
+    this.fetchCharacterById(id);
+  }
+
+  componentDidUpdate() {
+    if (this.state.characterData.id != this.props.match.params.id) {
+      this.fetchCharacterById(this.props.match.params.id);
+    }
+  }
+
+  fetchCharacterById(id) {
+    fetch(`http://localhost:4567/api/character/${id}`)
+      .then(response => response.json())
+      .then(response => {
+        console.log(response);
+        this.setState({
+          characterData: response.data.results[0],
+          characterLoaded: true
+        });
+      });
+  }
+
   handleFavoriteClick(evt) {
     let user_id = 1; //hard coded user_id for now
     let marvel_id = this.state.characterData.id;
@@ -27,30 +50,6 @@ class CharacterDetail extends Component {
         "Content-Type": "application/json"
       }
     });
-  }
-
-  componentDidMount() {
-    let { id } = this.props.match.params;
-    this.fetchCharacterById(id);
-  }
-
-  componentDidUpdate() {
-    let { id } = this.props.match.params;
-    if (this.state.characterData.id != id) {
-      this.fetchCharacterById(this.props.match.params.id);
-    }
-  }
-
-  fetchCharacterById(id) {
-    fetch(`http://localhost:4567/api/character/${id}`)
-      .then(response => response.json())
-      .then(response => {
-        console.log(response);
-        this.setState({
-          characterData: response.data.results[0],
-          characterLoaded: true
-        });
-      });
   }
 
   render() {
