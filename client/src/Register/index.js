@@ -1,61 +1,71 @@
 import React, { Component } from "react";
+import './style.css'
 
 class Register extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      password: "",
-      clickedRegister: false
+    constructor(props) {
+      super(props);
+      this.state = {
+        username: "",
+        password: "",
+        clickedRegister: false
+      };
+      this.handleInputChange = this.handleInputChange.bind(this);
+      this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
+    }
+
+    handleInputChange(evt) {
+      console.log(evt.target);
+      this.setState({
+        [evt.target.name]: evt.target.value
+      })
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
-  }
 
+    handleRegisterSubmit(evt) {
+      evt.preventDefault();
+      console.log('you clicked button');
+      this.setState({
+        clickedLogin: true
+      })
+    };
 
-  handleInputChange(evt) {
-    console.log(evt.target);
-    this.setState({
-      [evt.target.name]: evt.target.value
-    })
-  };
-
-  handleRegisterSubmit(evt) {
-    evt.preventDefault();
-    console.log('you clicked button');
-    this.setState({
-      clickedLogin: true
-    })
-  };
-
-  render() {
-    return (
+    render() {
+      return (
 
       <form onSubmit={this.handleRegisterSubmit}>
-      <div>
-        <label>
-          Username
-          <input
-            name="username"
-            placeholder="Username"
-            value={this.state.username}
-            onChange={this.handleInputChange}
-          />
-          <br />
-        </label>
-        <label>
-          Password
-          <input
-            name="password"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this.handleInputChange}
-          />
-        </label>
+        <div className="form">
+          <h2>Create an account!</h2>
+          <div className="form-group">
+            <label className="user-label">
+              <br />
+            <input
+              name="username"
+              placeholder="Enter username"
+              value={this.state.username}
+              onChange={this.handleInputChange}
+            />
+            </label>
+            <small id="usernameHelp" class="form-text text-muted">We'll never share your username with anyone else.</small>
+          </div>
+
+          <div className="form-group">
+            <label className="user-label">
+              <br />
+            <input
+              name="username"
+              placeholder="Enter password"
+              value={this.state.password}
+              onChange={this.handleInputChange}
+            />
+            </label>
+            <br />
+            <button className="register-button">Register</button>
+          </div>
+
         </div>
-        <button>Register</button>
+
       </form>
+
 
     )
   }
