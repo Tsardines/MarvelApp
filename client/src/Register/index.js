@@ -46,7 +46,7 @@ class Register extends React.Component {
               onChange={this.handleInputChange}
             />
             </label>
-            <small id="usernameHelp" className="form-text text-muted">We'll never share your username with anyone else.</small>
+            <small className="form-text">We'll never share your username with anyone else.</small>
           </div>
 
           <div className="form-group">

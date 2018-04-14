@@ -9,21 +9,15 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
-
+  NavLink } from 'reactstrap';
 
   class Bar extends React.Component {
 
-
     render() {
       return (
-        <div>
-          <Navbar className="NavbarClass" expand="md">
-            <NavbarBrand className="Brand" href="/"> MARVEL CHARACTER FINDER</NavbarBrand>
+        <div className="nav-div">
+          <Navbar className="Navbar" expand="md">
+            <NavbarBrand className="brand" href="/"> MARVEL CHARACTER FINDER</NavbarBrand>
 
               <Nav className="ml-auto" navbar>
                 <NavItem>

@@ -1,16 +1,18 @@
-body {
-  background-image: url('./marvel_comics.jpg');
-  background-size: 1400px 700px;
-}
+
 
 .form {
-  border-style: solid;
-  border-width: 2px;
-  height: 400px;
+  background-image: url('./marvel_comics.jpg');
+  background-size: 1400px 700px;
+  height: auto;
   margin: 0 auto;
   padding-top: 50px;
   text-align: center;
-  width: 40%;
+  width: auto;
+}
+
+.form-text {
+  color: white;
+  outline-color: black;
 }
 
 .user-box {

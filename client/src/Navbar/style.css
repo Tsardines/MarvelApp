@@ -1,5 +1,11 @@
-.Brand {
-/*   background-image: url("../assets/marvel-char-finder-logo.gif"); */
+/* @media (min-width: 1200px) {
+    .container{
+        max-width: 970px;
+    }
+} */
+
+.brand {
+
 }
 
 .ml-auto {
@@ -7,11 +13,15 @@
   text-decoration: none;
 }
 
+.nav-div {
+  width: 100%;
+}
+
 .NavLinkClass:hover {
   color: red;
 }
 
-.NavbarClass {
+.Navbar {
   background-color: black;
-  width: 100%;
+/*   width: 100vw; */
 }
