@@ -35,23 +35,24 @@ class Register extends React.Component {
       <form onSubmit={this.handleRegisterSubmit}>
         <div className="form">
           <h2>Create an account!</h2>
+
           <div className="form-group">
             <label className="user-label">
               <br />
-            <input
+            <input className="user-box"
               name="username"
               placeholder="Enter username"
               value={this.state.username}
               onChange={this.handleInputChange}
             />
             </label>
-            <small id="usernameHelp" class="form-text text-muted">We'll never share your username with anyone else.</small>
+            <small id="usernameHelp" className="form-text text-muted">We'll never share your username with anyone else.</small>
           </div>
 
           <div className="form-group">
-            <label className="user-label">
+            <label className="pass-label">
               <br />
-            <input
+            <input className="user-box"
               name="username"
               placeholder="Enter password"
               value={this.state.password}
@@ -59,7 +60,7 @@ class Register extends React.Component {
             />
             </label>
             <br />
-            <button className="register-button">Register</button>
+            <button className="register-button">Submit</button>
           </div>
 
         </div>
