@@ -1,29 +1,20 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import "./style.css";
 import "../index.css";
 import {
-  Collapse,
   Navbar,
-  NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
-
+  NavLink } from 'reactstrap';
+import "./style.css";
 
   class Bar extends React.Component {
 
-
     render() {
       return (
-        <div>
-          <Navbar className="NavbarClass" expand="md">
-            <NavbarBrand className="Brand" href="/"> MARVEL CHARACTER FINDER</NavbarBrand>
+        <div className="container-fluid">
+          <Navbar className="Navbar" expand="md">
+            <div className="brand" href="/">MARVEL CHARACTER FINDER</div>
 
               <Nav className="ml-auto" navbar>
                 <NavItem>

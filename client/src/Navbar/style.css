@@ -1,17 +1,50 @@
-.Brand {
-/*   background-image: url("../assets/marvel-char-finder-logo.gif"); */
+@media (min-width: 1200px) {
+  .container{
+      max-width: 970px;
+  }
+}
+
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,300,700);
+
+.brand {
+  color: white;
+  font-size: 55px;
+}
+
+body {
+  font-family: 'Oswald', sans-serif !important;
+}
+
+.brand:hover {
+  color: red;
+
 }
 
 .ml-auto {
-  padding: 5px 20px 5px 5px;
+  padding: 30px 20px 5px 5px;
   text-decoration: none;
+}
+
+.container-fluid {
+  background-color: black;
+/*   padding: 0 80px 0 80px; */
+  margin: 0 auto;
+}
+
+.NavItem {
+  padding-top: 45px;
+}
+
+.NavLinkClass {
+  color: white;
+  font-size: 25px;
 }
 
 .NavLinkClass:hover {
   color: red;
 }
 
-.NavbarClass {
+.Navbar {
   background-color: black;
-  width: 100%;
+  width: 110%;
 }

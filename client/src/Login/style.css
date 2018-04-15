@@ -1,5 +1,42 @@
-body {
-  background-color: black;
+
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,300,700);
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+}
+
+/* Desktops and laptops ----------- */
+/* @media only screen and (min-width : 1224px) {
+} */
+
+.form-class {
+  background-image: url('./comics-background.jpg');
+  background-size: 1400px 700px;
+  font-family: 'Oswald', sans-serif !important;
+  font-size: 20px;
+  height: 700px;
+  text-align: center;
+  width: 1200px;
+}
+
+.form-text {
+  color: black;
+  text-shadow: 2px 2px white;
+}
+
+.user-box {
+  border-radius: 4px;
+}
+
+.submit-button {
+  border-radius: 4px;
+}
+
+.submit-button:hover {
+  background-color: red;
+}
+
+.welcome {
   color: white;
-  font-family: 'Noto Sans', sans-serif;
+  text-shadow: 3px 2px black;
 }
