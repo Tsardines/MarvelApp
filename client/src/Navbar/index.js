@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "../index.css";
 import {
   Navbar,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink } from 'reactstrap';
@@ -15,7 +14,7 @@ import "./style.css";
       return (
         <div className="container-fluid">
           <Navbar className="Navbar" expand="md">
-            <NavbarBrand className="brand" href="/"> MARVEL CHARACTER FINDER</NavbarBrand>
+            <div className="brand" href="/">MARVEL CHARACTER FINDER</div>
 
               <Nav className="ml-auto" navbar>
                 <NavItem>

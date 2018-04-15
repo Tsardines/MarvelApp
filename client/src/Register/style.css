@@ -1,38 +1,41 @@
 @import url(http://fonts.googleapis.com/css?family=Oswald:400,300,700);
 
-body {
-  font-family: 'Oswald', sans-serif !important;
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+}
+
+/* Desktops and laptops ----------- */
+@media only screen and (min-width : 1224px) {
 }
 
 .form {
   background-image: url('./marvel_comics.jpg');
   background-size: 1400px 700px;
+  font-family: 'Oswald', sans-serif !important;
   font-size: 20px;
-  height: 100%;
-/*   margin: 0 auto; */
-  padding-top: 50px;
+  height: 700px;
   text-align: center;
-  width: auto;
-}
-
-.form-group {
-  padding-bottom: 25px;
+  width: 1200px;
 }
 
 .form-text {
   color: white;
-  outline-color: black;
+  text-shadow: 2px 2px black;
 }
 
 .user-box {
   border-radius: 4px;
-  margin-bottom: 100%;
 }
 
 .register-button {
   border-radius: 4px;
 }
 
-h2 {
+.register-button:hover {
+  background-color: red;
+}
 
+.create-account {
+  color: white;
+  text-shadow: 3px 2px black;
 }

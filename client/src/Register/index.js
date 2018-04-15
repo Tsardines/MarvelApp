@@ -34,10 +34,11 @@ class Register extends React.Component {
 
       <form onSubmit={this.handleRegisterSubmit}>
         <div className="form">
-          <h2>Create an account!</h2>
+          <h2 className="create-account">Create an account!</h2>
 
           <div className="form-group">
             <label className="user-label">
+              <medium className="form-text">We'll never share your username with anyone else.</medium>
               <br />
             <input className="user-box"
               name="username"
@@ -46,7 +47,6 @@ class Register extends React.Component {
               onChange={this.handleInputChange}
             />
             </label>
-            <medium className="form-text">We'll never share your username with anyone else.</medium>
           </div>
 
           <div className="form-group">
