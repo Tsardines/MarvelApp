@@ -10,7 +10,9 @@ class CharacterPage extends Component {
     super(props);
     this.state = {
       characters: [],
-      charactersLoaded: false
+      charactersLoaded: false,
+      offset: 0,
+      scrollHeightTripped: 0
     };
     this.fetchCharacters = this.fetchCharacters.bind(this);
   }
@@ -19,19 +21,40 @@ class CharacterPage extends Component {
     this.fetchCharacters();
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevState.offset !== this.state.offset) {
+      this.fetchCharacters();
+    }
+  }
+
+
   fetchCharacters() {
-    fetch("http://localhost:4567/api/characters")
+    let offset = this.state.offset
+    fetch(`http://localhost:4567/api/characters/${offset}`)
       .then(response => response.json())
       .then(charactersAsJson => {
         let characters = charactersAsJson.data.results;
         let charactersWithDescriptionsAndImages = characters.filter(character => {
           return (character.description.length > 0 && !character.thumbnail.path.includes('image_not_available'));
         });
+        let updatedCharacters = this.state.characters.concat(charactersWithDescriptionsAndImages);
+        // console.log(updatedCharacters);
         this.setState({
-          characters: charactersWithDescriptionsAndImages,
+          characters: updatedCharacters,
           charactersLoaded: true
         });
       });
+  }
+
+  handleScroll(currentScrollTop, currentScrollHeight) {
+    console.log(`handleScroll was called! at currentScrollHeight ${currentScrollHeight}`)
+    if (currentScrollTop > this.state.scrollHeightTripped) {
+      console.log(`yes, currentScrollTop ${currentScrollTop} > this.state.scrollHeightTripped ${this.state.scrollHeightTripped}`)
+      this.setState({
+        scrollHeightTripped: currentScrollHeight,
+        offset: this.state.offset + 100
+      })
+    }
   }
 
   render() {
@@ -42,7 +65,10 @@ class CharacterPage extends Component {
     return (
       <Router>
         <div className="character-page">
-          <CharacterList characters={this.state.characters} />
+          <CharacterList
+            characters={this.state.characters}
+            onScroll={(a, b) => this.handleScroll(a, b)}
+          />
           <Route
             exact
             path="/character/:id"

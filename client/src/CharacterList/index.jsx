@@ -14,8 +14,15 @@ class CharacterList extends Component {
     this.handleFilterText = this.handleFilterText.bind(this);
   }
 
+  componentDidUpdate() {
+    if (this.props.characters != this.state.filteredCharacterArray) {
+      this.setState({
+        filteredCharacterArray: this.props.characters
+      })
+    }
+  }
+
   handleFilterText(evt) {
-    // const filterValue = evt.target.value;
     const filteredCharacters = this.props.characters.filter(character =>
       character.name
         .toLocaleLowerCase()
@@ -26,6 +33,16 @@ class CharacterList extends Component {
       filterText: evt.target.value,
       filteredCharacterArray: filteredCharacters
     });
+  }
+
+  handleScroll(evt) {
+    //Got this idea from https://stackoverflow.com/questions/45585542/detecting-when-user-scrolls-to-bottom-of-div-with-react-js
+    let {scrollTop, scrollHeight, clientHeight} = evt.target;
+    console.log(`scrollTop: ${scrollTop}, scrollHeight: ${scrollHeight}, clientHeight: ${clientHeight}`);
+    if (scrollTop >= Math.floor(scrollHeight - clientHeight - 1)) {
+      // alert(`scrollHeight: ${scrollHeight}`);
+      this.props.onScroll(scrollTop, scrollHeight);
+    }
   }
 
   render() {
@@ -44,13 +61,14 @@ class CharacterList extends Component {
         <h3>CHARACTER LIST</h3>
         <div className="filter-bar">
           <CharacterListFilter
-            // characterData={characterItems}
             onChange={this.handleFilterText}
             filterText={this.state.filterText}
           />
         </div>
         <div className="character-cell-container">
-          <ul>{characterItems}</ul>
+          <ul onScroll={(e) => this.handleScroll(e)}>
+            {characterItems}
+          </ul>
         </div>
       </div>
     );

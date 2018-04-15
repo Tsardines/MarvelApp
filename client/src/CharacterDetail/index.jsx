@@ -9,7 +9,29 @@ class CharacterDetail extends Component {
     };
     this.fetchCharacterById = this.fetchCharacterById.bind(this);
     this.handleFavoriteClick = this.handleFavoriteClick.bind(this);
-    // this.getCharacterFromDB = this.getCharacterFromDB.bind(this);
+  }
+
+  componentDidMount() {
+    let { id } = this.props.match.params;
+    this.fetchCharacterById(id);
+  }
+
+  componentDidUpdate() {
+    if (this.state.characterData.id != this.props.match.params.id) {
+      this.fetchCharacterById(this.props.match.params.id);
+    }
+  }
+
+  fetchCharacterById(id) {
+    fetch(`http://localhost:4567/api/character/${id}`)
+      .then(response => response.json())
+      .then(response => {
+        console.log(response);
+        this.setState({
+          characterData: response.data.results[0],
+          characterLoaded: true
+        });
+      });
   }
 
   handleFavoriteClick(evt) {
@@ -28,53 +50,6 @@ class CharacterDetail extends Component {
         "Content-Type": "application/json"
       }
     });
-
-
-
-
-
-    //1. getCharacterFromDB
-      // if character is in DB, return character info
-      // else,
-        //fetch from api,
-        //insert character into db
-        //return character info
-    //2. addCharacterToFavorites(user_id)
-        //three args: user_id, character_id, notes
-  }
-
-  // getCharacterFromDB(){
-  //   let marvel_id = this.state.characterData.id;
-  //   fetch(`http://localhost:4567/character/${marvel_id}`)
-  //     .then(response => response.json())
-  //     .then(characterAsJson => {
-  //       //pass back the character, and use the character_id to pass to favorites
-  //       console.log(characterAsJson);
-  //     })
-  // }
-
-  componentDidMount() {
-    let { id } = this.props.match.params;
-    this.fetchCharacterById(id);
-  }
-
-  componentDidUpdate() {
-    let { id } = this.props.match.params;
-    if (this.state.characterData.id != id) {
-      this.fetchCharacterById(this.props.match.params.id);
-    }
-  }
-
-  fetchCharacterById(id) {
-    fetch(`http://localhost:4567/api/character/${id}`)
-      .then(response => response.json())
-      .then(response => {
-        console.log(response);
-        this.setState({
-          characterData: response.data.results[0],
-          characterLoaded: true
-        });
-      });
   }
 
   render() {
