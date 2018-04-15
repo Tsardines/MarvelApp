@@ -1,21 +1,19 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import "./style.css";
 import "../index.css";
 import {
-  Collapse,
   Navbar,
-  NavbarToggler,
   NavbarBrand,
   Nav,
   NavItem,
   NavLink } from 'reactstrap';
+import "./style.css";
 
   class Bar extends React.Component {
 
     render() {
       return (
-        <div className="nav-div">
+        <div className="container-fluid">
           <Navbar className="Navbar" expand="md">
             <NavbarBrand className="brand" href="/"> MARVEL CHARACTER FINDER</NavbarBrand>
 
