@@ -37,12 +37,14 @@ class CharacterDetail extends Component {
   handleFavoriteClick(evt) {
     let user_id = 1; //hard coded user_id for now
     let marvel_id = this.state.characterData.id;
-    console.log(`you clicked fav button. marvel_id ${marvel_id}, user_id ${user_id}`);
+    console.log(
+      `you clicked fav button. marvel_id ${marvel_id}, user_id ${user_id}`
+    );
     const body = {
       user_id: user_id,
       marvel_id: marvel_id
     };
-    console.log(JSON.stringify(body))
+    console.log(JSON.stringify(body));
     fetch(`http://localhost:4567/favorite`, {
       method: "POST",
       body: JSON.stringify(body),
@@ -54,7 +56,7 @@ class CharacterDetail extends Component {
 
   render() {
     if (!this.state.characterData) {
-      return <h4>Loading...</h4>
+      return <h4>Loading...</h4>;
     }
 
     let { name, description, thumbnail } = this.state.characterData;
@@ -62,15 +64,12 @@ class CharacterDetail extends Component {
 
     return (
       <div className="character-detail-container">
-        <h1>CHARACTER DETAIL</h1>
-        <button
-          onClick={this.handleFavoriteClick}
-          className="favorite-button">
+        <button onClick={this.handleFavoriteClick} className="favorite-button">
           Add To Favorites
         </button>
-        <h3>{name}</h3>
-        <img src={thumbnail} />
-        <p> {description}</p>
+        <h3 className="char-name">{name}</h3>
+        <img className="image" src={thumbnail} />
+        <p className="description"> {description}</p>
       </div>
     );
   }
