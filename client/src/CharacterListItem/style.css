@@ -2,10 +2,11 @@
   width: 100px;
 }
 
-.character-list-item {
-
-}
-
 ul {
   float: left;
+}
+
+.character-list-item {
+  display: flex;
+  flex-direction: column;
 }

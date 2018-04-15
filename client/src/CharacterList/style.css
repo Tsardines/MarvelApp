@@ -1,9 +1,9 @@
 .character-cell-container {
   color: black;
-  height: 80vh;
+  height: 81vh;
   float: left;
-/*   background-color: orange;
- */}
+  text-decoration: none;
+}
 
 .character-cell-container ul {
   color: black;
@@ -11,20 +11,18 @@
   height: 100%;
   list-style-type: none;
   overflow: auto;
-
   float: left;
 }
 
 .character-list-container {
   color: black;
   float: left;
-/*   padding: 0 75px 50px 75px; */
-}
-
-.filter-bar {
 }
 
 h3 {
-float: left;
+  float: left;
+}
 
+h5 {
+  padding-top: 20px;
 }
