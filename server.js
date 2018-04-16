@@ -66,10 +66,14 @@ app.post('/api/user/new', jsonParser, (request, response) => {
   let hashedPassword = bcrypt.hashSync(rawPassword, salt);
   // create new user in db w/ hashed pw
   User.createNewUser(newUsername, hashedPassword)
-  .then(data => tokenService.makeToken({
+  .then(data => {
+    console.log('data back from createNewUser: ', data)
+    return tokenService.makeToken({
       username: data
-  }))
+    })
+  })
   .then(token => {
+    console.log('token: ', token)
     response.json({
       token: token
     })
@@ -92,18 +96,27 @@ app.post("/login", jsonParser, (request, response) => {
       // let hashedEnteredPassword = bcrypt.hashSync(enteredPassword, salt);
       // const pwIsMatch = hashedEnteredPassword === validUserInfo.password_digest;
     if (pwIsMatch && usernameIsMatch) {
+      console.log('password and username match!')
+      console.log('valid user info: ', validUserInfo)
       // request.session.authenticated = true;
       // request.session.userId = validUserInfo.id;
       //do some front end thing where user is brought to homepage
       // response.send("passwords match");
       tokenService.makeToken({
-        username: validUserInfo.username
+        username: validUserInfo
       })
-    } else {
-      response.send("Sorry, the password does not match with the username");
-      //do some front end thing where user is brought back to login page
+    // } else {
+    //   throw new Error('Invalid Credentials')
+    //   // response.send("Sorry, the password does not match with the username");
+    //   //do some front end thing where user is brought back to login page
     }
-  });
+  })
+  .then(token => {
+    console.log('token:', token)
+    response.json({
+      token: token
+    })
+  })
 });
 
 //gets a specific user's favorite list

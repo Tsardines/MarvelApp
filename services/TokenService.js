@@ -32,6 +32,7 @@ class Token {
 
   // generates a new token
   makeToken(payload) {
+    console.log('now in makeToken!')
     return new Promise((resolve, reject) =>
       jwt.sign(
         payload,
