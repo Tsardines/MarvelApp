@@ -8,7 +8,7 @@ User.findUsername = foundUsername => {
 
 User.createNewUser = (username, password) => {
   return db.one(
-    "INSERT INTO user_table (username, password_digest) VALUES ($1, $2)",
+    "INSERT INTO user_table (username, password_digest) VALUES ($1, $2) RETURNING *",
     [username, password]
   );
 };

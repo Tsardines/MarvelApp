@@ -56,6 +56,19 @@ app.post('/signup', urlencodedParser, (request, response) => {
   );
 });
 
+//REGISTER - add new user and password to DB
+app.post('/api/user/new', jsonParser, (request, response) => {
+  // get pw entered by user
+  const newUsername = request.body.username;
+  const rawPassword = request.body.password;
+  // salt and hash password
+  let hashedPassword = bcrypt.hashSync(rawPassword, salt);
+  // create new user in db w/ hashed pw
+  User.createNewUser(newUsername, hashedPassword).then(
+    response.send("You created a new user!")
+  );
+});
+
 
 // LOGIN the user if their username and password are correct.
 app.post("/login", urlencodedParser, (request, response) => {
