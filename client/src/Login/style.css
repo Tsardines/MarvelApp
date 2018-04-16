@@ -1,8 +1,7 @@
-
 @import url(http://fonts.googleapis.com/css?family=Oswald:400,300,700);
 
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
 }
 
 /* Desktops and laptops ----------- */
@@ -10,13 +9,13 @@
 } */
 
 .form-class {
-  background-image: url('./comics-background.jpg');
+  background-image: url("./comics-background.jpg");
   background-size: 1400px 700px;
-  font-family: 'Oswald', sans-serif !important;
+  font-family: "Oswald", sans-serif !important;
   font-size: 20px;
   height: 700px;
   text-align: center;
-  width: 1200px;
+  width: 100%;
 }
 
 .form-text {
