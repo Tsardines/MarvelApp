@@ -64,12 +64,12 @@ class CharacterDetail extends Component {
 
     return (
       <div className="character-detail-container">
-        <button onClick={this.handleFavoriteClick} className="favorite-button">
-          Add To Favorites
-        </button>
         <h3 className="char-name">{name}</h3>
         <img className="image" src={thumbnail} />
         <p className="description"> {description}</p>
+        <button onClick={this.handleFavoriteClick} className="favorite-button">
+          Add To Favorites
+        </button>
       </div>
     );
   }
