@@ -39,15 +39,9 @@ class FavoritePage extends Component {
     return (
       <Router>
         <div className="favorite-page">
-          <p>This is the favorites page!</p>
           <FavoriteList
             favoriteCharacters={this.state.favoriteCharacters}
           />
-          {/* <Route
-            exact
-            path="/character/:id"
-            render={({ match }) => <CharacterDetail match={match} />} */}
-          {/* /> */}
         </div>
       </Router>
     );

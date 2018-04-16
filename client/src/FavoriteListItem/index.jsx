@@ -5,13 +5,13 @@ class FavoriteListItem extends Component {
   render() {
     let { name, image_url, description } = this.props.favoriteData;
     return (
-      <div className="character-list-item">
-        <li>{name}</li>
+      <div className="favorite-list-item">
+        <li className="name">{name}</li>
         <img
           src={image_url}
           className="thumbnail"
         />
-        <p>{description}</p>
+        <p className="description">{description}</p>
       </div>
     );
   }
