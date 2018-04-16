@@ -96,11 +96,11 @@ app.post('/favorite', jsonParser, (request, response) => {
   console.log('USERID: ', userId);
   console.log('MARVELID: ', characterId);
   //check if character already exists in marvel_character
-  MarvelCharacter.getByMarvelId(characterId)
-    .then(character => {
-      console.log(character);
+  MarvelCharacter.countByMarvelId(characterId)
+    .then(count => {
+      console.log(count);
       //if character exists in marvel_character, Favorite.getFavorite()
-      if (character.length > 0) {
+      if (count > 0) {
         //create favorite
         FavoriteCharacter.createFavorite(userId, characterId, notes)
           .then(
