@@ -28,7 +28,7 @@ As a group we talked about what we wanted to do for this project and we began to
 
 ![](Wireframes.jpeg)
 
-#UserStories
+# UserStories
 
 *   As a comic fan, I want to see all of the Marvel characters so that i can click on them and read their information.
 *   As a comic fan, I want to be able to scroll through the character list and see character preview, so that I don’t have to go to another page.
@@ -41,6 +41,7 @@ As a group we talked about what we wanted to do for this project and we began to
 
 # Descriptions of any unsolved problems or hurdles your team had to overcome
 
-- Connecting to the API the first time
-- Infinite scroll
-- Filtering characters
+When we came across the Marvel API, we were pretty stoked to use it in our project. However, we were not able to connect to the API that easily. Connecting properly was a dealbreaker for all of us, and we spent about an hour trying to get _something_ to show. It turned out that the Marvel API needed 3 arguments, one of which is an MD5 hash (MD5 is a hashing algorithm) of the timestamp+privateKey+publicKey (https://developer.marvel.com/documentation/authorization).
+
+We were fortunate in that the Marvel API is very popular, and there were a number of articles and blog posts that delved into the API in great detail.
+
