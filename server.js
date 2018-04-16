@@ -155,4 +155,12 @@ app.put("/favorite/edit/:user_id/:character_id", urlencodedParser, (request, res
   );
 });
 
+app.get("/marvel_character/:character_id", (request, response) => {
+  const characterId = request.params.character_id
+  MarvelCharacter.getByMarvelId(characterId).then(characterData => {
+    response.json(characterData)
+    }
+  )
+});
+
 app.listen(4567, () => {console.log("Marvel server listening on port 4567!")});

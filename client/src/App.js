@@ -5,6 +5,7 @@ import Login from "./Login";
 import Register from "./Register";
 import CharacterPage from "./CharacterPage";
 import CharacterDetail from "./CharacterDetail";
+import FavoritePage from "./FavoritePage";
 
 import "./App.css";
 
@@ -17,6 +18,7 @@ class App extends Component {
         <div className="container">
           <Navbar />
           <Route exact path="/" component={CharacterPage} />
+          <Route exact path="/favorites/1" component={FavoritePage} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
         </div>
