@@ -146,7 +146,7 @@ app.delete('/favorite/:user_id/:character_id', urlencodedParser, (request, respo
 });
 
 //edits a character's note in a specific user's favorite list
-app.put("/favorite/edit/:user_id/:character_id", urlencodedParser, (request, response) => {
+app.put("/favorite/edit/:user_id/:character_id", jsonParser, (request, response) => {
   const editNoteData = request.body.notes
   const userId = request.params.user_id
   const characterId = request.params.character_id

@@ -35,8 +35,19 @@ handleNotesChange(evt) {
 
 updateNoteInDB(evt) {
   evt.preventDefault()
-  //fetch to DB endpoint for put to favorite notes
+  const body = {
+    notes: this.state.notesInput
+  }
+  console.log("Marvel ID", this.props.favoriteData.character_id)
+  fetch(`http://localhost:4567/favorite/edit/1/${this.props.favoriteData.character_id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  })
 }
+
   render() {
     let { name, image_url, description, marvel_id, notes } = this.props.favoriteData;
     return (
@@ -50,7 +61,7 @@ updateNoteInDB(evt) {
         <form onSubmit={this.updateNoteInDB}>
           <input type="text" value={this.state.notesInput} onChange={this.handleNotesChange}>
           </input>
-          <input type="submit" ></input>
+          <input type="submit" value="Submit Note"></input>
         </form>
         <button onClick={this.deleteFromFavorites} >Delete From Favorites</button>
       </div>
