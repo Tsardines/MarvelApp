@@ -15,6 +15,7 @@ const MarvelData = require("./Models/MarvelData");
 const cors = require("cors");
 app.use(cors());
 const md5 = require('md5');
+const tokenService = require("./services/TokenService");
 
 //API required strings: timestamp, md5 hash, private key, public key
 function generateAPIstring() {
@@ -64,9 +65,18 @@ app.post('/api/user/new', jsonParser, (request, response) => {
   // salt and hash password
   let hashedPassword = bcrypt.hashSync(rawPassword, salt);
   // create new user in db w/ hashed pw
-  User.createNewUser(newUsername, hashedPassword).then(
-    response.send("You created a new user!")
-  );
+  User.createNewUser(newUsername, hashedPassword)
+  .then(data => tokenService.makeToken({
+      username: data
+  }))
+  .then(token => {
+    response.json({
+      token: token
+    })
+  })
+  // .then(
+  //   response.send("You created a new user!")
+  // );
 });
 
 

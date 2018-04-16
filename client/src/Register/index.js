@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import './style.css'
+import './style.css';
+import TokenService from "../services/TokenService";
 
 class Register extends React.Component {
 
@@ -34,7 +35,8 @@ class Register extends React.Component {
 
       this.createUser(body)
       .then(response => {
-        //TokenService.save(response.data.token)
+        TokenService.test(); //says hello in console.
+        TokenService.save(response.token)
       })
       .catch(err => console.log(`err: ${err}`));
 
@@ -50,7 +52,8 @@ class Register extends React.Component {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
-      });
+      })
+       .then(response => { return response.json() });
     }
 
     render() {
