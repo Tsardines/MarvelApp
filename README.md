@@ -10,7 +10,7 @@ We created the Marvel Character Finder app that will show a user the name, image
 
 # Explanations of the technologies used
 
-For our project we used the Marvel Api that has various types of information for each Marverl superhero(https://developer.marvel.com/). We also used MD5, which is a hashing algorithm that accepts a string message of any length as input, and produces a hash of that string. All Marvel API calls are expected to have 3 arguments, one of which is an MD5 hash of the timestamp+privateKey+publicKey (https://developer.marvel.com/documentation/authorization)
+For our project we used the Marvel Api that has various types of information for each Marvel superhero(https://developer.marvel.com/). We also used MD5, which is a hashing algorithm that accepts a string message of any length as input, and produces a hash of that string. All Marvel API calls are expected to have 3 arguments, one of which is an MD5 hash of the timestamp+privateKey+publicKey (https://developer.marvel.com/documentation/authorization)
 
 # A couple of paragraphs about the general approach you took
 
@@ -26,7 +26,7 @@ As a group we talked about what we wanted to do for this project and we began to
 
 # Wireframe
 
-![](WireFrames.jpeg)
+![](Wireframes.jpeg)
 
 #UserStories
 
@@ -40,3 +40,7 @@ As a group we talked about what we wanted to do for this project and we began to
 *   As somebody who wants a convenient webpage, I want to have a nav bar on the top of my page ,so that I can easily access the links i need.
 
 # Descriptions of any unsolved problems or hurdles your team had to overcome
+
+- Connecting to the API the first time
+- Infinite scroll
+- Filtering characters
