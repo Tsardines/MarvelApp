@@ -3,7 +3,7 @@ const db = require("../database/connection");
 const User = {};
 
 User.findUsername = foundUsername => {
-  return db.one("SELECT * FROM user_table WHERE username = $1", [foundUsername]);
+  return db.one("SELECT * FROM user_table WHERE username = $1 LIMIT 1", [foundUsername]);
 };
 
 User.createNewUser = (username, password) => {

@@ -81,9 +81,10 @@ app.post('/api/user/new', jsonParser, (request, response) => {
 
 
 // LOGIN the user if their username and password are correct.
-app.post("/login", urlencodedParser, (request, response) => {
+app.post("/login", jsonParser, (request, response) => {
   const enteredUsername = request.body.username;
   const enteredPassword = request.body.password;
+  console.log(enteredUsername);
   User.findUsername(enteredUsername).then(validUserInfo => {
     const usernameIsMatch = enteredUsername === validUserInfo.username;
     let pwIsMatch = bcrypt.compareSync(enteredPassword, validUserInfo.password_digest);

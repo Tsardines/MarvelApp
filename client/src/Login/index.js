@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import './style.css'
+import TokenService from "../services/TokenService";
+
+
 class Login extends React.Component {
 
   constructor(props) {
@@ -11,6 +14,7 @@ class Login extends React.Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+    this.login = this.login.bind(this);
   }
 
   handleInputChange(evt) {
@@ -22,11 +26,35 @@ class Login extends React.Component {
 
   handleLoginSubmit(evt) {
     evt.preventDefault();
-    console.log('you clicked button');
-    this.setState({
-      clickedLogin: true
+    console.log('you clicked login button');
+
+    const { username, password } = this.state;
+    const body = {
+      username: username,
+      password: password
+    };
+    console.log(body)
+
+    this.login(body)
+    .then(response => {
+      TokenService.test(); //console logs hello
+      TokenService.save(response.token);
     })
+    // this.setState({
+    //   clickedLogin: true
+    // })
   };
+
+  login(data) {
+      return fetch(`http://localhost:4567/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+       .then(response => { return response.json() });
+    }
 
   render() {
     return (
