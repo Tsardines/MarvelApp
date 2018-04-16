@@ -18,9 +18,9 @@ componentDidMount() {
   marvelIds.forEach(id => {
     console.log(this.getCharacterInfo(id))
   })
-  // this.setState({
-  //   favoriteCharactersIds: marvelIds
-  // })
+  this.setState({
+    favoriteCharactersIds: marvelIds
+  })
 }
 
 getCharacterInfo(character_id) {
@@ -39,18 +39,13 @@ getCharacterInfo(character_id) {
     if (!this.state.favoritesArray) {
       return <p>Loading Favorite List...</p>;
     }
-    let favorites = this.state.favoritesArray;
+    let favorites = this.props.favoriteCharacters;
     let favoriteItems = favorites.map(favorite => {
-    console.log(favorite.marvel_id)
-    console.log(this.props.favoriteCharacters)
+    // console.log(favorite.marvel_id)
+    // console.log(this.props.favoriteCharacters)
       return (
       <div className="favorite-item-container">
-        <FavoriteListItem favoriteData={favorite} key={favorite.marvel_id} />
-        <form>
-          <input type="text">
-          </input>
-          <input type="submit"></input>
-        </form>
+        <FavoriteListItem favoriteData={favorite} key={favorite.character_id} />
       </div>
     )}
   );

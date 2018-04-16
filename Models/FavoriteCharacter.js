@@ -10,7 +10,15 @@ FavoriteCharacter.createFavorite = (user_id, character_id, notes) => {
 };
 
 FavoriteCharacter.findAll = user_id => {
-  return db.any("SELECT * FROM favorite_character WHERE user_id = $1", [user_id]);
+  return db.any(`SELECT
+    favorite_character.notes,
+    favorite_character.character_id,
+    marvel_character.name,
+    marvel_character.description,
+    marvel_character.image_url
+  FROM favorite_character JOIN marvel_character
+  ON favorite_character.character_id = marvel_character.marvel_id
+  WHERE user_id = $1`, [user_id]);
 };
 
 FavoriteCharacter.findFavoriteByUserIdAndCharacterId = (user_id, character_id) => {
