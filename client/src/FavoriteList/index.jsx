@@ -33,15 +33,17 @@ getCharacterInfo(character_id) {
       favoritesArray: updatedFavoritesArray
     })
   })
-)
-}
+)}
+
   render() {
     if (!this.state.favoritesArray) {
       return <p>Loading Favorite List...</p>;
     }
     let favorites = this.state.favoritesArray;
     let favoriteItems = favorites.map(favorite => (
+      <div className="favorite-item-container">
         <FavoriteListItem favoriteData={favorite} key={favorite.marvel_id} />
+      </div>
     ));
 
     return (
