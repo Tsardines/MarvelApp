@@ -2,9 +2,9 @@ const db = require("../database/connection");
 
 const MarvelCharacter = {};
 
-// MarvelCharacter.getByMarvelId = (marvel_id) => {
-//   return db.one(`SELECT * FROM marvel_character WHERE marvel_id = $1`, [marvel_id])
-// }
+MarvelCharacter.getByMarvelId = (marvel_id) => {
+  return db.one(`SELECT * FROM marvel_character WHERE marvel_id = $1`, [marvel_id])
+}
 
 MarvelCharacter.countByMarvelId = (marvel_id) => {
   return db.one(`SELECT COUNT(*) FROM marvel_character WHERE marvel_id = $1`, [marvel_id])

@@ -22,7 +22,7 @@ import "./style.css";
                 </NavItem>
 
                 <NavItem>
-                  <NavLink className="NavLinkClass" href="/favorites">Favorites</NavLink>
+                  <NavLink className="NavLinkClass" href="/favorites/1">Favorites</NavLink>
                 </NavItem>
 
                 <NavItem>
