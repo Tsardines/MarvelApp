@@ -41,19 +41,17 @@ getCharacterInfo(character_id) {
     }
     let favorites = this.state.favoritesArray;
     let favoriteItems = favorites.map(favorite => (
-      <Link to={`/character/${favorite.id}`}>
-        <FavoriteListItem favoriteData={favorite} key={favorite.id} />
-      </Link>
+        <FavoriteListItem favoriteData={favorite} key={favorite.marvel_id} />
     ));
 
     return (
       <div className="favorite-list-container">
         <h3>FAVORITES LIST</h3>
-        {/* <div className="character-cell-container">
+        <div className="character-cell-container">
           <ul>
-            {this.favoriteItems}
+            {favoriteItems}
           </ul>
-        </div> */}
+        </div>
       </div>
     );
   }

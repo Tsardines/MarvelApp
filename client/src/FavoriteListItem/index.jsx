@@ -3,15 +3,15 @@ import "./style.css";
 
 class FavoriteListItem extends Component {
   render() {
-    let { name, description, thumbnail } = this.props.favoriteData;
-    thumbnail = thumbnail.path + "." + thumbnail.extension;
+    let { name, image_url, description } = this.props.favoriteData;
     return (
       <div className="character-list-item">
         <li>{name}</li>
         <img
-          src={thumbnail}
+          src={image_url}
           className="thumbnail"
         />
+        <p>{description}</p>
       </div>
     );
   }
