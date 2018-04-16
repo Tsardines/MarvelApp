@@ -1,23 +1,21 @@
 .character-detail-container {
   color: black;
   display: flex;
-  /*   background-color: green;
-   */ /* height: 100%; */
-  padding: 50px 100px 50px 75px;
   flex-direction: column;
+  padding: 50px 100px 50px 75px;
 }
 
 .char-name {
-  justify-content: center;
   align-self: center;
+  justify-content: center;
   text-decoration: none;
 }
 
 .image {
-  height: 300px;
-  width: 300px;
-  padding-bottom: 20px;
   align-self: center;
+  height: 300px;
+  padding-bottom: 20px;
+  width: 300px;
 }
 
 .description {
@@ -26,11 +24,12 @@
 }
 
 .favorite-button {
-  width: 175px;
-  height: 30px;
-  align-self: flex-end;
-  border-color: black;
+  align-self: center;
   background-color: turquoise;
+  border-color: black;
+  height: 30px;
+  padding-right: 25px;
+  width: 175px;
 }
 
 /* .char-name .favorite-button .image .description {
