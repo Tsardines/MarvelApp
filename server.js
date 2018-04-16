@@ -95,7 +95,10 @@ app.post("/login", jsonParser, (request, response) => {
       // request.session.authenticated = true;
       // request.session.userId = validUserInfo.id;
       //do some front end thing where user is brought to homepage
-      response.send("passwords match");
+      // response.send("passwords match");
+      tokenService.makeToken({
+        username: validUserInfo.username
+      })
     } else {
       response.send("Sorry, the password does not match with the username");
       //do some front end thing where user is brought back to login page
