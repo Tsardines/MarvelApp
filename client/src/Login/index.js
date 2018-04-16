@@ -51,7 +51,7 @@ class Login extends React.Component {
             <label className="pass-label">
               <br />
             <input className="user-box"
-              name="username"
+              name="password"
               placeholder="Enter your password"
               value={this.state.password}
               onChange={this.handleInputChange}
