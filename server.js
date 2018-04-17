@@ -89,34 +89,19 @@ app.post("/login", jsonParser, (request, response) => {
   const enteredUsername = request.body.username;
   const enteredPassword = request.body.password;
   console.log(enteredUsername);
-  User.findUsername(enteredUsername).then(validUserInfo => {
-    const usernameIsMatch = enteredUsername === validUserInfo.username;
-    let pwIsMatch = bcrypt.compareSync(enteredPassword, validUserInfo.password_digest);
-    //Alternate way of doing the password checking:
-      // let hashedEnteredPassword = bcrypt.hashSync(enteredPassword, salt);
-      // const pwIsMatch = hashedEnteredPassword === validUserInfo.password_digest;
-    if (pwIsMatch && usernameIsMatch) {
-      console.log('password and username match!')
-      console.log('valid user info: ', validUserInfo)
-      // request.session.authenticated = true;
-      // request.session.userId = validUserInfo.id;
-      //do some front end thing where user is brought to homepage
-      // response.send("passwords match");
+  User.login(request.body)
+    .then(data =>
       tokenService.makeToken({
-        username: validUserInfo
+        username: data
       })
-    // } else {
-    //   throw new Error('Invalid Credentials')
-    //   // response.send("Sorry, the password does not match with the username");
-    //   //do some front end thing where user is brought back to login page
-    }
-  })
-  .then(token => {
-    console.log('token:', token)
-    response.json({
-      token: token
+    )
+    .then(token => {
+      console.log('token:', token)
+      response.json({
+        token: token
+      })
     })
-  })
+    .catch(err => console.log(`throwing an error: ${err}`));
 });
 
 //gets a specific user's favorite list
