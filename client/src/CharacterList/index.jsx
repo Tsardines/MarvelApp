@@ -59,17 +59,19 @@ class CharacterList extends Component {
     return (
       <div className="character-list-container">
         <h3>CHARACTER LIST</h3>
-        <div className="filter-bar">
+        {/* <div className="filter-bar">
           <CharacterListFilter
             onChange={this.handleFilterText}
             filterText={this.state.filterText}
           />
-        </div>
+        </div> */}
         <div className="character-cell-container">
           <ul onScroll={(e) => this.handleScroll(e)}>
             {characterItems}
           </ul>
         </div>
+
+
       </div>
     );
   }
