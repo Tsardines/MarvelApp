@@ -15,6 +15,7 @@ const MarvelData = require("./Models/MarvelData");
 const cors = require("cors");
 app.use(cors());
 const md5 = require('md5');
+const tokenService = require("./services/TokenService");
 
 //API required strings: timestamp, md5 hash, private key, public key
 function generateAPIstring() {
@@ -56,27 +57,51 @@ app.post('/signup', urlencodedParser, (request, response) => {
   );
 });
 
+//REGISTER - add new user and password to DB
+app.post('/api/user/new', jsonParser, (request, response) => {
+  // get pw entered by user
+  const newUsername = request.body.username;
+  const rawPassword = request.body.password;
+  // salt and hash password
+  let hashedPassword = bcrypt.hashSync(rawPassword, salt);
+  // create new user in db w/ hashed pw
+  User.createNewUser(newUsername, hashedPassword)
+  .then(data => {
+    console.log('data back from createNewUser: ', data)
+    return tokenService.makeToken({
+      username: data
+    })
+  })
+  .then(token => {
+    console.log('token: ', token)
+    response.json({
+      token: token
+    })
+  })
+  // .then(
+  //   response.send("You created a new user!")
+  // );
+});
+
 
 // LOGIN the user if their username and password are correct.
-app.post("/login", urlencodedParser, (request, response) => {
+app.post("/login", jsonParser, (request, response) => {
   const enteredUsername = request.body.username;
   const enteredPassword = request.body.password;
-  User.findUsername(enteredUsername).then(validUserInfo => {
-    const usernameIsMatch = enteredUsername === validUserInfo.username;
-    let pwIsMatch = bcrypt.compareSync(enteredPassword, validUserInfo.password_digest);
-    //Alternate way of doing the password checking:
-      // let hashedEnteredPassword = bcrypt.hashSync(enteredPassword, salt);
-      // const pwIsMatch = hashedEnteredPassword === validUserInfo.password_digest;
-    if (pwIsMatch && usernameIsMatch) {
-      // request.session.authenticated = true;
-      // request.session.userId = validUserInfo.id;
-      //do some front end thing where user is brought to homepage
-      response.send("passwords match");
-    } else {
-      response.send("Sorry, the password does not match with the username");
-      //do some front end thing where user is brought back to login page
-    }
-  });
+  console.log(enteredUsername);
+  User.login(request.body)
+    .then(data =>
+      tokenService.makeToken({
+        username: data
+      })
+    )
+    .then(token => {
+      console.log('token:', token)
+      response.json({
+        token: token
+      })
+    })
+    .catch(err => console.log(`throwing an error: ${err}`));
 });
 
 //gets a specific user's favorite list

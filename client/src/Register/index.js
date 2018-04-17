@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import './style.css'
+import './style.css';
+import TokenService from "../services/TokenService";
 
 class Register extends React.Component {
 
@@ -12,7 +13,9 @@ class Register extends React.Component {
       };
       this.handleInputChange = this.handleInputChange.bind(this);
       this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
+      this.createUser = this.createUser.bind(this);
     }
+
 
     handleInputChange(evt) {
       console.log(evt.target);
@@ -23,11 +26,35 @@ class Register extends React.Component {
 
     handleRegisterSubmit(evt) {
       evt.preventDefault();
-      console.log('you clicked button');
-      this.setState({
-        clickedLogin: true
+      console.log('you clicked register button');
+      const { username, password } = this.state;
+      const body = {
+        username: username,
+        password: password
+      };
+
+      this.createUser(body)
+      .then(response => {
+        TokenService.test(); //says hello in console.
+        TokenService.save(response.token)
       })
+      .catch(err => console.log(`err: ${err}`));
+
+      // this.setState({
+      //   clickedLogin: true
+      // })
     };
+
+    createUser(data) {
+      return fetch(`http://localhost:4567/api/user/new`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+       .then(response => { return response.json() });
+    }
 
     render() {
       return (

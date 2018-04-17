@@ -7,8 +7,21 @@ import {
   NavItem,
   NavLink } from 'reactstrap';
 import "./style.css";
+import TokenService from "../services/TokenService";
+
 
   class Bar extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+      };
+      this.logOut = this.logOut.bind(this);
+    }
+
+    logOut(evt) {
+      TokenService.test();
+      TokenService.destroy();
+    }
 
     render() {
       return (
@@ -31,6 +44,10 @@ import "./style.css";
 
                 <NavItem>
                   <NavLink className="NavLinkClass" href="/register">Register</NavLink>
+                </NavItem>
+
+                <NavItem>
+                  <NavLink className="NavLinkClass" href="/login" onClick={this.logOut}>Logout</NavLink>
                 </NavItem>
               </Nav>
             </Navbar>
