@@ -45,3 +45,4 @@ When we came across the Marvel API, we were pretty stoked to use it in our proje
 
 We were fortunate in that the Marvel API is very popular, and there were a number of articles and blog posts that delved into the API in great detail.
 
+We were able to assign JSON tokens to new users on account creation and to returning users upon login, but were unable to restrict favorite pages from users that did not have a token. Our user is hardcoded into the URL paths, but we hope to retrofit our paths to reflect whatever user is logged in at that time by pulling data from their token, and allowing them access to their own personalized favorite pages.
