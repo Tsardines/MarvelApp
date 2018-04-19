@@ -1,6 +1,6 @@
 -- to run this in terminal: $ psql -f ./database/seed.sql
 
-\c marvel_app;
+-- \c marvel_app;
 
 INSERT INTO user_table (username, password_digest)
 VALUES ('ewok', '$2a$10$7BfZk7868jGqY5fXtZrZ1egYJtOH/rMt8jHT4vHrL8nvTmSqf0mqy'); --this is just the hashed version of "password"

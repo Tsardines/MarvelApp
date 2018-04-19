@@ -1,9 +1,9 @@
 -- to run this in terminal: $ psql -f ./database/schema.sql
 
-DROP DATABASE IF EXISTS marvel_app;
-CREATE DATABASE marvel_app;
+-- DROP DATABASE IF EXISTS marvel_app;
+-- CREATE DATABASE marvel_app;
 
-\c marvel_app;
+-- \c marvel_app;
 
 DROP TABLE IF EXISTS user_table CASCADE;
 DROP TABLE IF EXISTS marvel_character CASCADE;
