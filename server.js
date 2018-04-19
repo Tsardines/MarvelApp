@@ -17,6 +17,7 @@ app.use(cors());
 const md5 = require('md5');
 const tokenService = require("./services/TokenService");
 const PORT = process.env.PORT || 3000;
+const path = require('path');
 
 //API required strings: timestamp, md5 hash, private key, public key
 function generateAPIstring() {
