@@ -32,7 +32,7 @@ function generateAPIstring() {
 //get first 100 characters from API
 app.get('/api/characters/:offset', (request, response) => {
   let offset = request.params.offset;
-  MarvelData.getReponseAsJSON(`http://gateway.marvel.com/v1/public/characters?${generateAPIstring()}&offset=${offset}&limit=100`).then(characters => {
+  MarvelData.getReponseAsJSON(`https://gateway.marvel.com/v1/public/characters?${generateAPIstring()}&offset=${offset}&limit=100`).then(characters => {
     response.json(characters)
   })
 });
@@ -40,7 +40,7 @@ app.get('/api/characters/:offset', (request, response) => {
 //get specific character by id from API
 app.get('/api/character/:id', (request, response) => {
   const id = request.params.id
-  MarvelData.getReponseAsJSON(`http://gateway.marvel.com/v1/public/characters/${id}?${generateAPIstring()}`).then(character => {
+  MarvelData.getReponseAsJSON(`https://gateway.marvel.com/v1/public/characters/${id}?${generateAPIstring()}`).then(character => {
     response.json(character)
   })
 });
@@ -138,7 +138,7 @@ app.post('/favorite', jsonParser, (request, response) => {
       //ask api for the data
       else {
         console.log('about to fetch');
-        fetch(`http://gateway.marvel.com/v1/public/characters/${characterId}?${generateAPIstring()}`)
+        fetch(`https://gateway.marvel.com/v1/public/characters/${characterId}?${generateAPIstring()}`)
             .then(character => {
               console.log('character back from api: ', character);
               character.json()
