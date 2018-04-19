@@ -24,7 +24,7 @@ componentDidMount() {
 }
 
 getCharacterInfo(character_id) {
-  fetch(`http://localhost:4567/marvel_character/${character_id}`)
+  fetch(`/marvel_character/${character_id}`)
   .then(response => response.json()
   .then(characterAsJSON => {
     let updatedFavoritesArray = this.state.favoritesArray.slice()

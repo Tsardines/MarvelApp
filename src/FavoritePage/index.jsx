@@ -20,7 +20,7 @@ class FavoritePage extends Component {
   }
 
   fetchFavorites() {
-    fetch(`http://localhost:4567/favorites/1`)
+    fetch(`/favorites/1`)
       .then(response => response.json())
       .then(charactersAsJson => {
         let favorites = charactersAsJson

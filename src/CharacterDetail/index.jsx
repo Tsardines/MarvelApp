@@ -23,7 +23,7 @@ class CharacterDetail extends Component {
   }
 
   fetchCharacterById(id) {
-    fetch(`http://localhost:4567/api/character/${id}`)
+    fetch(`/api/character/${id}`)
       .then(response => response.json())
       .then(response => {
         console.log(response);
@@ -45,7 +45,7 @@ class CharacterDetail extends Component {
       marvel_id: marvel_id
     };
     console.log(JSON.stringify(body));
-    fetch(`http://localhost:4567/favorite`, {
+    fetch(`/favorite`, {
       method: "POST",
       body: JSON.stringify(body),
       headers: {

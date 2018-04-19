@@ -30,7 +30,7 @@ class CharacterPage extends Component {
 
   fetchCharacters() {
     let offset = this.state.offset
-    fetch(`http://localhost:4567/api/characters/${offset}`)
+    fetch(`/api/characters/${offset}`)
       .then(response => response.json())
       .then(charactersAsJson => {
         let characters = charactersAsJson.data.results;

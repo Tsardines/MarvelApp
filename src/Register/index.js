@@ -46,7 +46,7 @@ class Register extends React.Component {
     };
 
     createUser(data) {
-      return fetch(`http://localhost:4567/api/user/new`, {
+      return fetch(`/api/user/new`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

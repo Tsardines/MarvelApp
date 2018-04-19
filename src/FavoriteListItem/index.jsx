@@ -19,7 +19,7 @@ class FavoriteListItem extends Component {
   }
 
   deleteFromFavorites(user_id, character_id) {
-    fetch(`http://localhost:4567/favorite/1/${this.props.favoriteData.character_id}`, {
+    fetch(`/favorite/1/${this.props.favoriteData.character_id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
@@ -39,7 +39,7 @@ updateNoteInDB(evt) {
     notes: this.state.notesInput
   }
   console.log("Marvel ID", this.props.favoriteData.character_id)
-  fetch(`http://localhost:4567/favorite/edit/1/${this.props.favoriteData.character_id}`, {
+  fetch(`/favorite/edit/1/${this.props.favoriteData.character_id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"

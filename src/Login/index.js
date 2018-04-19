@@ -46,7 +46,7 @@ class Login extends React.Component {
   };
 
   login(data) {
-      return fetch(`http://localhost:4567/login`, {
+      return fetch(`/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

@@ -16,6 +16,7 @@ const cors = require("cors");
 app.use(cors());
 const md5 = require('md5');
 const tokenService = require("./services/TokenService");
+const PORT = process.env.PORT || 3000;
 
 //API required strings: timestamp, md5 hash, private key, public key
 function generateAPIstring() {
@@ -188,4 +189,4 @@ app.get("/marvel_character/:character_id", (request, response) => {
   )
 });
 
-app.listen(4567, () => {console.log("Marvel server listening on port 4567!")});
+app.listen(PORT, () => {console.log(`Marvel server listening on port ${PORT}!`)});
