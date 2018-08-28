@@ -65,7 +65,7 @@ class Register extends React.Component {
 
           <div className="form-group">
             <label className="user-label">
-              <medium className="form-text">We'll never share your username with anyone else.</medium>
+              <medium className="form-text">We'll never share your password with anyone else.</medium>
               <br />
             <input className="user-box"
               name="username"
