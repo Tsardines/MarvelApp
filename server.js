@@ -85,7 +85,6 @@ app.post('/api/user/new', jsonParser, (request, response) => {
   // );
 });
 
-
 // LOGIN the user if their username and password are correct.
 app.post("/login", jsonParser, (request, response) => {
   const enteredUsername = request.body.username;
